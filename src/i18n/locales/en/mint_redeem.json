@@ -1,0 +1,72 @@
+{
+  "history": "History",
+  "all": "All",
+  "history_table": {
+    "transaction": "Transactions",
+    "time": "Time",
+    "empty": "You have no transactions.",
+    "connect_wallet_for": "to view transaction history!"
+  },
+  "mint": {
+    "title": "Mint",
+    "submit_text": "Receive VNST",
+    "covered_amount": "Mint Covered Amount",
+    "covered_price": "Mint Covered Price",
+    "covered_amount_tooltip": "The remaining amount of VNST support users if the exchange rate experiences price impact beyond the covered price",
+    "covered_price_tooltip": "Supported price range during VNST minting to mitigate the impact of VMM exchange rate decreases beyond Y% range compared to market price\n(Y): VNST will constantly update this value based on real-time market conditions."
+  },
+  "redeem": {
+    "title": "Redeem",
+    "submit_text": "Receive USDT",
+    "covered_amount": "Redeem Covered Amount",
+    "covered_price": "Redeem Covered Price",
+    "covered_amount_tooltip": "The remaining amount of USDT support users if the exchange rate experiences price impact beyond the covered price",
+    "covered_price_tooltip": "Supported price range during redeeming mitigate the impact of VMM exchange rate increase beyond X% range compared to market price\n(X): VNST will constantly update this value based on real-time market conditions.",
+    "fee": "Redeem Fee",
+    "fee_tooltip": "The cost for processing a USDT redemption transaction"
+  },
+  "refresh_exchange_rate": "Refresh price",
+  "max": "Max",
+  "price_updated": "Price Updated",
+  "accept": "Accept",
+  "errors": {
+    "min_amount": "Minimum of {{amount}} {{symbol}}",
+    "max_amount": "Maximum of {{amount}} {{symbol}}",
+    "not_enough_balance": "Insufficient balance!"
+  },
+  "price": "Price",
+  "confirm_modal": {
+    "confirm_transaction": "Transaction Detail",
+    "confirm_transaction_desc": "Please sign and approve the transaction through your Wallet",
+    "loading": "Loading...",
+    "accept_legal_term": "Accept the latest updated <a class='text-primary hover:underline' href='https://whitepaper.vnst.io/vnst_whitepaper_en/table-of-contents/legal-terms' target='_blank'>Legal Terms</a> of VNST",
+    "refer_exchange_rate": "Exchange rate calculation method",
+    "loading_desc": "{{type}} request is being processed, please wait!",
+    "transaction_success_title": "Success",
+    "transaction_failed_title": "Failed",
+    "transaction_success_desc": {
+      "mint": "Congratulations! You have minted",
+      "redeem": "Congratulations! You have redeemed"
+    },
+    "time": "Time",
+    "close": "Close",
+    "go_back": "Go back",
+    "confirm_btn": "Confirm"
+  },
+  "txn_errors": {
+    "caller_lacks_necessary_permission": "Sorry, you have no permission to access this function. Please try again later.",
+    "market_price_below_covered_mint_price": "The Mint Covered Price is being updated. Please wait a few minutes before you try again, or contact us <a class='text-primary hover:underline' href='business@vnst.io'>here</a>.",
+    "market_price_above_covered_redeem_price": "The Redeem Covered Price is being updated. Please wait a few minutes before you try again, or contact us <a class='text-primary hover:underline' href='business@vnst.io'>here</a>.",
+    "usdt_insufficient": "Insufficient balance, please deposit more!",
+    "min_usdt_amount": "Min: 100,000.00 VNST",
+    "something_went_wrong": "Something went wrong. Please try again later!",
+    "max_usdt_amount": "Maximum USDT Amount exceed",
+    "out_of_covered_mint_amount": "Mint covered amount is temporarily unavailable, please wait a few minutes!",
+    "vnst_insufficient": "Insufficient balance, please deposit more!",
+    "min_vnst_amount": "Min: 100,000.00 VNST",
+    "out_of_covered_redeem_amount": "Redeem covered amount is temporarily unavailable, please wait a few minutes!",
+    "user_rejected_error": "{{type}} request failed.<br/> Reason: You rejected the wallet authentication",
+    "chain_miss_match": "Reminder<br/>Please connect to the appropriate network",
+    "insufficient_allowance": "ERC20: Insufficient allowance!"
+  }
+}

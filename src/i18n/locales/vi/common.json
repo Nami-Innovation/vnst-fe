@@ -1,0 +1,46 @@
+{
+  "connect_error": {
+    "default": "Kết nối Ví thất bại, vui lòng thử lại!",
+    "user_rejected": "Kết nối Ví thất bại, người dùng từ chối yêu cầu."
+  },
+  "connect_success": "Kết nối Ví thành công!",
+  "connect_wallet": "Kết nối Ví",
+  "disconnect_wallet": "Ngắt kết nối Ví",
+  "balance": "Số dư",
+  "copied": "Đã sao chép",
+  "filter": {
+    "weekend": "Tuần này",
+    "last_week": "Tuần trước",
+    "last_day": "Hôm qua",
+    "month": "Tháng này",
+    "last_month": "Tháng trước",
+    "all": "Tất cả",
+    "custom": "Tuỳ chọn"
+  },
+  "dont_wallet_extension": "Chưa sở hữu Ví?",
+  "learn_add_wallet": "Hướng dẫn tạo Ví",
+  "install_wallet": "Cài đặt {{wallet}} Extension",
+  "add_extension_content": "Vui lòng cài đặt {{wallet}} Extension để tiếp tục quá trình kết nối Ví đến VNST. Chưa sở hữu Ví?\nVui lòng xem hướng dẫn phía dưới.",
+  "btn": {
+    "install": "Cài đặt",
+    "all": "Tất cả",
+    "confirm": "Xác nhận",
+    "update": "Cập nhật"
+  },
+  "how_to_install": "Hướng dẫn cài đặt {{wallet}} Extension",
+  "input": {
+    "sfa": "Tìm kiếm..."
+  },
+  "language": "Ngôn ngữ",
+  "trades": "Số lệnh",
+  "update_notification_success": "Cập nhật thông báo thành công!",
+  "update_notification_error": "Cập nhật thông báo thất bại. Vui lòng thử lại!",
+  "success_verify": "Thành công",
+  "success_verify_content": "Chúc mừng, bạn đã kích hoạt nhận thông qua báo Email thành công",
+  "error_otp": "Mã xác minh không chính xác, vui lòng nhập lại",
+  "dont_receive": "Không nhận được? ",
+  "mint_success": "Mint thành công",
+  "success_mint": "Chúc mừng, bạn đã nhận",
+  "success_redeem": "Chúc mừng, bạn đã nhận",
+  "redeem_success": "Redeem thành công"
+}

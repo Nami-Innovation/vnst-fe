@@ -1,0 +1,51 @@
+.bg-blogs {
+  background-image: url('/assets/images/footer-pattern-dot.png');
+  background-position-y: bottom;
+  background-position-x: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  @media only screen and (max-width: 992px) {
+    background-image: url('/assets/images/bg-mobile-blogs.png');
+    background-size: cover;
+  }
+}
+
+.bg-thumbnail:hover {
+  background-image: url(/assets/images/bg-blog-thumbnail.svg);
+  background-repeat: no-repeat;
+  background-color: theme('colors.black');
+  background-size: cover;
+  .des-blogs-thumbnail {
+    color: white;
+  }
+  .title-blogs-thumbnail {
+    background: -webkit-linear-gradient(
+      360deg,
+      rgba(0, 102, 102, 1) 0%,
+      rgba(0, 192, 150, 1) 52.6%,
+      rgba(142, 255, 233, 1) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.bg-thumbnail {
+  background-color: theme('colors.dark.1');
+}
+
+.bg-thumbnail-gradient:hover {
+  background: linear-gradient(
+    360deg,
+    rgba(0, 102, 102, 0.2) 0%,
+    rgba(0, 192, 150, 0.2) 52.6%,
+    rgba(142, 255, 233, 0.2) 100%
+  );
+  h1 {
+    @apply bg-gradient-to-r from-primary-dark via-primary to-primary-light bg-clip-text text-transparent;
+  }
+  span {
+    color: theme('colors.grayBackground');
+  }
+}

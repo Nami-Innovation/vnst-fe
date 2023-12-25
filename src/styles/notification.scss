@@ -1,0 +1,36 @@
+#notification {
+  @media only screen and (max-width: 992px) {
+    background-image: url(/assets/images/notification_mb_bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+  }
+  @apply bg-dark-1
+}
+
+.scroll-bar-primary::-webkit-scrollbar {
+  width: 5px !important;
+}
+
+/* Track */
+.scroll-bar-primary::-webkit-scrollbar-track {
+ @apply bg-dark-2;
+}
+
+/* Handle */
+.scroll-bar-primary::-webkit-scrollbar-thumb {
+  @apply bg-primary-dark rounded-[5px];
+
+}
+
+/* Handle on hover */
+.scroll-bar-primary::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-light;
+}
+
+.noti-popup {
+  height: calc(100vh - 60px);
+  @screen lg {
+    height: max-content !important;
+  }
+}

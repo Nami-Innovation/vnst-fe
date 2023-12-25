@@ -1,0 +1,47 @@
+{
+  "connect_error": {
+    "default": "Connection failed, please try again!",
+    "user_rejected": "Connection failed, user rejected the request."
+  },
+  "connect_success": "Successfully connected!",
+  "connect_wallet": "Connect Wallet",
+  "disconnect_wallet": "Disconnect Wallet",
+  "balance": "Balance",
+  "copied": "Copied",
+  "filter": {
+    "weekend": "This week",
+    "last_week": "Last week",
+    "last_day": "Last day",
+    "month": "This month",
+    "last_month": "Last month",
+    "all": "All",
+    "custom": "Custom"
+  },
+  "dont_wallet_extension": "Don't yet have a Wallet Extension?",
+  "learn_add_wallet": "Learn how to add a Wallet",
+  "install_wallet": "Install {{wallet}} Extension",
+  "add_extension_content": "Please add {{wallet}} Extension to continue the wallet connection process with VNST. Don't yet have a Wallet Extension?\nRead the instructions below.",
+  "btn": {
+    "install": "Install",
+    "all": "All",
+    "confirm": "Confirm",
+    "update": "Update"
+  },
+  "how_to_install": "How to Install {{wallet}} Extension",
+  "input": {
+    "sfa": "Search for anything..."
+  },
+  "language": "Language",
+  "trades": "Trades",
+  "confirm": "Confirm",
+  "update_notification_success": "Update Notification is Successfully!",
+  "update_notification_error": "Update Notification is Failed!",
+  "success_verify": "Successful",
+  "success_verify_content": "Congrats, you have successfully enabled email notification",
+  "error_otp": "Verification code is incorrect, please enter again.",
+  "dont_receive": "Do not receive? ",
+  "mint_success": "Mint Successful",
+  "success_mint": "You have successfully minted",
+  "success_redeem": "You have successfully redeemed",
+  "redeem_success": "Redeem Successful"
+}

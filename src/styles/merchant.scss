@@ -1,0 +1,161 @@
+#comming-soon {
+  background-image: url(/assets/images/bg_comming_soon.svg);
+}
+
+#box {
+  background-image: url(/assets/images/comming_soon.svg);
+}
+
+#banner_merchant {
+  background-image: url(/assets/images/merchant/bg_banner.svg);
+}
+
+#total_merchant {
+  background-image: url(/assets/images/merchant/bg_stats.svg);
+}
+
+.bg-gradient-banner {
+  background: linear-gradient(
+    360deg,
+    rgba(0, 102, 102, 0.3) 0%,
+    rgba(0, 192, 150, 0.3) 52.6%,
+    rgba(142, 255, 233, 0.3) 100%
+  );
+}
+
+#merchant_pool {
+  background-image: url(/assets/images/merchant/bg_merchant_pool.png);
+  // background-position: 50% 10%;
+  background-size: cover;
+  @media only screen and (max-width: 992px) {
+    background-image: url(/assets/images/merchant/bg_merchant_pool_mobile.png);
+  }
+  @media only screen and (min-width: 1560px) {
+    background-image: url(/assets/images/merchant/bg_merchant_pool_2k.png);
+  }
+}
+
+#form_submit {
+  background-image: url(/assets/images/merchant/merchant_map.png);
+  background-position: 50% 10%;
+  background-size: cover;
+  @media only screen and (min-width: 1560px) {
+    background-image: url(/assets/images/merchant/merchant_map_2k.png);
+  }
+}
+
+#table_ranking {
+  background-image: url(/assets/images/merchant/merchant_table.png);
+  background-position: bottom;
+  background-size: 100% 522px;
+  background-repeat: no-repeat;
+}
+
+.rdrDefinedRangesWrapper {
+  display: none !important;
+}
+
+.rdrCalendarWrapper {
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.rdrWeekDay {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.rdrDayDisabled {
+  background-color: transparent;
+}
+.rdrDateDisplay {
+  display: none !important;
+}
+
+.rdrMonthAndYearPickers {
+  display: flex;
+  align-items: center;
+  justify-items: space-around !important;
+  color: white;
+}
+
+.rdrInRange {
+  background-color: rgba(71, 204, 133, 0.1) !important;
+}
+
+.rdrCalendarWrapper:not(.rdrDateRangeWrapper)
+  .rdrDayHovered
+  .rdrDayNumber:after {
+  content: '';
+  border: none !important;
+  background: transparent !important;
+}
+
+.rdrDayStartPreview {
+  border: none !important;
+}
+
+.rdrMonthAndYearWrapper {
+  position: relative !important;
+  bottom: -13% !important;
+
+  @screen lg {
+    position: relative !important;
+    top: 30px !important;
+  }
+
+  .rdrMonthAndYearPickers {
+    display: none !important;
+  }
+}
+
+.apexcharts-xaxis-tick {
+  display: none !important;
+}
+
+.nami_merchant_bg {
+  background-image: url(/assets/images/merchant/nami_exchange_mb.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @screen lg {
+    background-image: url(/assets/images/merchant/nami_exchange.svg);
+  }
+}
+
+.oxalus_merchant_bg {
+  background-image: url(/assets/images/merchant/oxalus_bg_mb.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @screen lg {
+    background-image: url(/assets/images/merchant/oxalus_bg.svg);
+  }
+}
+
+.merchant_pool td,
+.merchant_pool th {
+  @apply border-b border-grayBackground bg-white text-dark-2;
+}
+
+@keyframes loop-in {
+  0% {
+    opacity: 0.8;
+    scale: 0.8;
+  }
+  50% {
+    opacity: 1;
+    scale: 1;
+  }
+  100% {
+    opacity: 1.2;
+    scale: 1.2;
+  }
+}
+.animation-logo:hover {
+  opacity: 1;
+  scale: 1;
+  animation: loop-in 1s linear infinite;
+}

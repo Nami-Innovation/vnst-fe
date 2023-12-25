@@ -1,0 +1,7 @@
+.price-chart {
+    .apexcharts-tooltip {
+        @apply shadow-none p-3 rounded-md;
+        background: theme('colors.black') !important;
+        border: 1px solid theme('colors.dark.2') !important
+    }
+}

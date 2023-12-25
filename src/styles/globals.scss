@@ -1,0 +1,275 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@layer base {
+  body {
+    @apply font-medium;
+
+    tr:last-child {
+      td {
+        @apply border-none;
+      }
+    }
+  }
+  body::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 4px theme('colors.primary.dark/30');
+    border-radius: 10px;
+  }
+
+  body::-webkit-scrollbar-track {
+    background-color: theme('colors.dark.1');
+  }
+  body::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  table {
+    @apply w-full table-auto;
+  }
+
+  td,
+  th {
+    @apply border-b border-black bg-dark-1 text-dark-3;
+  }
+  td {
+    @apply p-3 text-xs lg:p-4;
+  }
+
+  th {
+    @apply px-3 py-2.5 text-start font-semibold lg:px-4;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-dark via-primary to-primary-light bg-clip-text text-transparent;
+  }
+
+  .text-gradient-1 {
+    @apply bg-gradient-to-r from-primary-dark to-primary bg-clip-text text-transparent;
+  }
+
+  .stroke-gradient {
+    stroke: url(#icon_gradient);
+  }
+
+  .fill-gradient {
+    fill: url(#icon_gradient);
+  }
+
+  .bg-gradient-ltr {
+    @apply bg-gradient-to-r from-primary-dark to-primary;
+  }
+
+  .bg-black-border-gradient {
+    @apply border border-transparent;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-image: linear-gradient(
+        theme('colors.black'),
+        theme('colors.black')
+      ),
+      linear-gradient(
+        to right,
+        theme('colors.primary.dark'),
+        theme('colors.primary.DEFAULT')
+      );
+  }
+
+  .bg-black-border-gradient- {
+    @apply border border-transparent;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-image: linear-gradient(
+        theme('colors.black'),
+        theme('colors.black')
+      ),
+      linear-gradient(
+        to right,
+        theme('colors.primary.dark'),
+        theme('colors.primary.DEFAULT')
+      );
+  }
+
+  .bg-brown-border-gradient {
+    @apply border border-transparent;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-image: linear-gradient(
+        theme('colors.dark.1'),
+        theme('colors.dark.1')
+      ),
+      linear-gradient(
+        to right,
+        theme('colors.primary.dark'),
+        theme('colors.primary.light')
+      );
+  }
+
+  .bg-black-related-thumbnail-border-gradient {
+    @apply border border-transparent;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-image: linear-gradient(
+        theme('colors.black'),
+        theme('colors.black')
+      ),
+      linear-gradient(
+        to right,
+        theme('colors.primary.dark'),
+        theme('colors.primary.light')
+      );
+  }
+
+  .bg-black-thumbnail-border-gradient {
+    @apply border-2 border-transparent;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-image: linear-gradient(
+        theme('colors.black/30'),
+        theme('colors.black')
+      ),
+      linear-gradient(
+        to right,
+        theme('colors.primary.dark'),
+        theme('colors.primary.light')
+      );
+  }
+
+  .border-b-gradient {
+    text-align: center;
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(
+      90deg,
+      theme('colors.primary.dark') 0%,
+      theme('colors.primary.DEFAULT') 52.6%,
+      theme('colors.primary.light') 100%
+    );
+    border-image-slice: 1;
+    width: 100%;
+  }
+  .border-t-gradient-1 {
+    text-align: center;
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(
+      90deg,
+      theme('colors.black') 0%,
+      theme('colors.primary.DEFAULT') 52.6%,
+      theme('colors.black') 100%
+    );
+    border-image-slice: 1;
+    width: 100%;
+  }
+  .bg-black-border-gradient-error {
+    @apply border border-transparent;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-image: linear-gradient(
+        theme('colors.black'),
+        theme('colors.black')
+      ),
+      linear-gradient(to right, theme('colors.danger'), theme('colors.danger'));
+  }
+  .border-b-gradient-error {
+    text-align: center;
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(
+      90deg,
+      theme('colors.danger') 0%,
+      theme('colors.danger') 52.6%,
+      theme('colors.white') 100%
+    );
+    border-image-slice: 1;
+    width: 100%;
+  }
+
+  .shadow-y {
+    box-shadow:
+      0px -15px 60px -50px theme('colors.primary.DEFAULT'),
+      0px 15px 60px -50px theme('colors.primary.DEFAULT');
+  }
+  .shadow-y-error {
+    box-shadow:
+      0px -15px 70px -50px theme('colors.danger'),
+      0px 15px 70px -50px theme('colors.danger');
+  }
+  .shadow-t {
+    box-shadow: 0px -10px 120px -40px theme('colors.primary.DEFAULT');
+  }
+
+  .circle-shadow {
+    box-shadow: 0px -25px 30px -20px #a2ffeb;
+    width: 100px;
+    height: 10px;
+    background-color: #00c096;
+    border-radius: 50% 50% 0 0;
+    filter: blur(20px);
+    -webkit-filter: blur(20px);
+    transform: translateZ(0);
+    @media only screen and (max-width: 992px) {
+      display: none;
+    }
+  }
+  .border-gradient-primary {
+    // @apply bg-gradient-to-r;
+    background-image: linear-gradient(270deg, #000 0%, rgba(0, 0, 0, 0) 100%),
+      linear-gradient(
+        360deg,
+        rgba(0, 102, 102, 0.2) 0%,
+        rgba(0, 192, 150, 0.2) 52.6%,
+        rgba(142, 255, 233, 0.2) 100%
+      );
+  }
+}
+
+.input-thumbnail-blogs:focus + .search-icon {
+  fill: url(#icon_gradient);
+  stroke: url(#icon_gradient);
+  .scroll-bar-primary {
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: theme('colors.dark.2');
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: theme('colors.primary.dark');
+      border-radius: 5px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: theme('colors.primary.light');
+    }
+  }
+}
+
+#form-submit {
+  background-image: url('/assets/images/bg-form.svg');
+  @media only screen and (max-width: 992px) {
+    background-image: url('/assets/images/bg-form-mobile.svg');
+  }
+}
+
+#fc_widget {
+  color-scheme: light;
+}

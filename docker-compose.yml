@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  vnst-fe:
+    image: vnst-fe
+    restart: always
+    build: .
+    ports:
+      - '${PORT:-3000}:3000'
+    networks:
+      - vnst-docker-stack_vnst-network
+
+networks:
+  vnst-docker-stack_vnst-network:
+    external: true
