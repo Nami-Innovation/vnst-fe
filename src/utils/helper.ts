@@ -41,13 +41,13 @@ export function capitalizeFirstLetter(string: string) {
 
 export const getBscScanLink = (txHash: string) => {
   const bscScanLink =
-    process.env.NEXT_PUBLIC_BSC_SCAN_URL || 'https://testnet.bscscan.com';
+    process.env.NEXT_PUBLIC_BSC_SCAN_URL || 'https://testnet.vicscan.xyz';
   return bscScanLink + '/tx/' + txHash;
 };
 
 export const getBscAddressLink = (address: string) => {
   const bscScanLink =
-    process.env.NEXT_PUBLIC_BSC_SCAN_URL || 'https://testnet.bscscan.com';
+    process.env.NEXT_PUBLIC_BSC_SCAN_URL || 'https://testnet.vicscan.xyz';
   return bscScanLink + '/address/' + address;
 };
 

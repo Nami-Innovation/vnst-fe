@@ -2,7 +2,7 @@ version: '3'
 
 services:
   vnst-fe:
-    image: vnst-fe
+    image: dockerhub.vnst.io/vnst-fe-prod
     restart: always
     build: .
     ports:

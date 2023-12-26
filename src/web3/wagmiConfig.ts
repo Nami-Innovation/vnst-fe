@@ -1,7 +1,8 @@
 'use client';
 
 import { createConfig, configureChains } from 'wagmi';
-import { bscTestnet, bsc } from '@wagmi/core/chains';
+// import { bscTestnet, bsc } from '@wagmi/core/chains';
+import { victionTestnet } from './viction';
 
 import { publicProvider } from 'wagmi/providers/public';
 // import { alchemyProvider } from 'wagmi/providers/alchemy'
@@ -13,7 +14,8 @@ import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { isDisabledAutoConnect } from './utils';
 import { isMainnet } from './constants';
 
-export const mainChain = isMainnet ? bsc : bscTestnet;
+// export const mainChain = isMainnet ? bsc : bscTestnet;
+export const mainChain = victionTestnet;
 
 // Configure chains & providers with the Alchemy provider.
 // Two popular providers are Alchemy (alchemy.com) and Infura (infura.io)
