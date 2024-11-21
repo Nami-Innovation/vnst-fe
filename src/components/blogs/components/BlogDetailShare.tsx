@@ -14,19 +14,19 @@ const shareSocials: Record<
 > = {
   facebook: {
     url: 'https://www.facebook.com/sharer/sharer.php?u',
-    children: <Social_Icon.Facebook />,
+    children: <Social_Icon.Facebook width={32} height={32} />,
   },
   linkedIn: {
     url: 'https://www.linkedin.com/shareArticle?mini=true&url',
-    children: <Social_Icon.Linkedin />,
+    children: <Social_Icon.Linkedin width={32} height={32} />,
   },
   twitter: {
     url: 'https://twitter.com/intent/tweet?url',
-    children: <Social_Icon.Twitter />,
+    children: <Social_Icon.Twitter width={32} height={32} />,
   },
   reddit: {
     url: 'https://www.reddit.com/submit?url',
-    children: <Social_Icon.Reddit />,
+    children: <Social_Icon.Reddit width={32} height={32} />,
   },
 };
 
@@ -41,18 +41,18 @@ export default function BlogDetailShare() {
   };
 
   return (
-    <div className='mt-3 md:mt-5'>
-      <h3 className='font-sf-pro-expanded text-xl font-bold leading-6 text-white'>
+    <div className='mt-3 flex w-full items-center justify-between md:mt-6'>
+      <h3 className='font-sf-pro-expanded text-xl font-bold leading-6 text-black'>
         {t('share_post')}
       </h3>
 
-      <div className='mt-2 flex items-center gap-3 text-dark-2 md:mt-4'>
+      <div className='flex items-center gap-x-1 text-dark-2'>
         {Object.keys(shareSocials).map((social) => {
           const platform = social as SharePlatform;
           return (
             <Link
               key={social}
-              className='hover:text-primary'
+              className='text-primary-dark hover:text-primary'
               href={handleShare(shareSocials[platform]?.url)}
               target='_blank'
             >

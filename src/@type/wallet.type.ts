@@ -7,4 +7,5 @@ export type Wallet = {
   enabledNoti: boolean;
   balance: number;
   nonce?: string;
+  isVerified: boolean;
 };

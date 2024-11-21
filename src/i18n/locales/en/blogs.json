@@ -2,5 +2,9 @@
   "meta_description": "Dive into the world of stablecoins through our comprehensive platform. Expand your knowledge today!",
   "share_post": "Share Post",
   "related_post": "Related Post",
-  "back_to_page": "Back to page"
+  "back_to_page": "Back to page",
+  "not_found_page": "Page not found",
+  "content_not_found": "Sorry, we couldn't find the page you are looking for",
+  "result_search": "Keyword '{{search}}' have {{num}} results",
+  "view_all": "View all"
 }

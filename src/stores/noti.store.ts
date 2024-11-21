@@ -4,22 +4,7 @@ import {
   getNotificationList,
   updateReadNotify,
 } from '@/services/notification.api';
-import { NOTIFICATION_TYPE } from '@/components/layout/Header/type';
-
-interface Notifications {
-  _id: string;
-  createdAt?: string;
-  updatedAt?: string;
-  read?: boolean;
-  type?: 'mint' | 'redeem';
-  wallet?: string;
-  readAll?: boolean;
-  metadata?: {
-    amountIn: number;
-    amountOut: number;
-  };
-  transaction?: boolean;
-}
+import { NOTIFICATION_TYPE } from '@/types/notification';
 
 type Store = {
   notiList: NOTIFICATION_TYPE[];

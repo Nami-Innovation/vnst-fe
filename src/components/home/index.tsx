@@ -15,10 +15,10 @@ const HomePage = async ({ lang, dataStats }: TProps) => {
   const { t } = await useTranslation(lang, 'homepage');
   return (
     <>
-      <div className='flex h-max w-full flex-col items-center justify-start border-none bg-grayBackground'>
+      <div className='flex h-max w-full flex-col items-center justify-start border-none bg-secondary-lightest'>
         <Banner lang={lang} dataStats={dataStats} />
         <Content lang={lang} />
-        <div className='mt-24 block w-full'>
+        <div className='mt-20 block w-full lg:mt-[160px]'>
           <BannerRoadMap
             title={t('title_map')}
             content={t('content_map')}

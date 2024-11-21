@@ -41,14 +41,14 @@ const Content = async ({ lang }: TProps) => {
   const { t } = await useTranslation(lang, 'homepage');
 
   return (
-    <div className='flex max-w-screen-xl flex-col items-center gap-[60px] border-none px-4 pb-10 lg:mt-0 xl:w-full'>
-      <div className='mb-20 flex flex-col items-center justify-center gap-y-2 text-center'>
+    <div className='mt-20 flex max-w-screen-xl flex-col items-center gap-[50px] border-none px-4 lg:mt-[124px] lg:gap-[80px] lg:px-0 xl:w-full'>
+      <div className='flex flex-col items-center justify-center gap-y-2 text-center'>
         <p
-          className='text-gradient-1 font-sf-pro-expanded text-mb-large font-bold uppercase leading-9 lg:text-large lg:leading-[60px]'
+          className='font-sf-pro-expanded text-mb-large font-bold uppercase leading-9 text-primary lg:text-[50px] lg:leading-[54px]'
           dangerouslySetInnerHTML={{ __html: t('content_title') }}
         ></p>
       </div>
-      <div className='grid w-full max-w-screen-xl grid-cols-1 grid-rows-3 items-center justify-center gap-y-[120px] lg:grid-cols-3 lg:grid-rows-1 lg:gap-x-[30px]'>
+      <div className='grid w-full max-w-screen-xl grid-cols-1 grid-rows-3 items-center justify-center gap-y-[46px] lg:grid-cols-3 lg:grid-rows-1 lg:gap-x-[30px]'>
         {contents.map((item, index) => (
           <div key={index} className='h-full w-full'>
             <ContentItem

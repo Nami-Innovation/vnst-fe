@@ -31,46 +31,48 @@ const BlogThumbnail: FC<BlogThumbnailProps> = ({
     <Link
       href={`/${lang}/blogs/${slug}`}
       className={clsx(
-        'hover:bg-black-thumbnail-border-gradient block w-full overflow-hidden rounded-xxl border-2 border-transparent',
+        'blog-thumbnail block h-[318px] overflow-hidden rounded-xxl border border-gray-200 bg-white p-2 shadow-box hover:border-primary',
         className
       )}
     >
-      <div className={clsx('bg-thumbnail flex flex-col')}>
+      <div className='h-full'>
         <div className='w-full'>
           <img
-            className='aspect-[3/1.7] rounded-b-xxl object-cover'
+            className='aspect-[3/1.7] rounded-md object-cover'
             src={featureImage || '/assets/images/bannerthumb.png'}
             alt='Banner Thumb'
-            // style={{ aspectRatio: "376/200" }}
           />
         </div>
-        <div className='h-[180px] px-[14px] py-4'>
-          <h1 className='title-blogs-thumbnail line-clamp-2 h-[56px] w-full font-sf-pro-expanded text-lg font-bold leading-6 text-white md:text-xl '>
-            {title}
-          </h1>
-
-          <span className='des-blogs-thumbnail my-3 line-clamp-2 text-sm font-semibold leading-5 text-dark-4 md:text-base'>
+        <div className='mt-3 flex flex-col gap-y-2 px-2 py-1'>
+          <h1
+            className='title-blog line-clamp-2 h-10 w-full text-sm font-semibold leading-[18px] text-black md:text-base lg:leading-5'
+            dangerouslySetInnerHTML={{ __html: title }}
+          ></h1>
+          <span className='line-clamp-2 max-h-9 text-xs font-semibold leading-4 text-gray'>
             {description}
           </span>
-
-          <div className='flex items-center'>
-            {tags?.map((tag: Tag) => {
-              if (!tag?.name?.includes('#')) {
-                return (
-                  <p
-                    key={tag?.id}
-                    className='bg-brown-border-gradient mr-3 rounded px-2 py-1 text-xs font-medium leading-[14px] text-white'
-                  >
-                    {tag.name}
-                  </p>
-                );
-              } else {
-                return null;
-              }
-            })}
-            <p className='pr-3 text-xs font-medium leading-[14px] text-primary'>
+          <div className='flex flex-col items-start gap-y-2'>
+            <p className='pr-2 text-xs font-semibold leading-[14px] text-gray'>
               {date ? dayjs(date).format('YYYY-MM-DD') : 'No Date'}
             </p>
+            <div className='flex-rows flex'>
+              {!!tags && tags.length > 0
+                ? tags?.map((tag: Tag) => {
+                    if (!tag?.name?.includes('#')) {
+                      return (
+                        <p
+                          key={tag?.id}
+                          className='mr-2 rounded-[6px] bg-blog-tag px-2 py-1 text-xs font-semibold capitalize leading-[14px] text-white'
+                        >
+                          {tag?.name}
+                        </p>
+                      );
+                    } else {
+                      return null;
+                    }
+                  })
+                : null}
+            </div>
           </div>
         </div>
       </div>

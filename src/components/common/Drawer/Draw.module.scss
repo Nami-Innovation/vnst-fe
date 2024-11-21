@@ -1,0 +1,27 @@
+.drawer {
+    animation: slideInUp 0.3s ease-in;
+}
+
+@keyframes slideInUp {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+.overlay {
+    animation: flat 0.3s ease-in;
+}
+
+@keyframes flat {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 100;
+    }
+}

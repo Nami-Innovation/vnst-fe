@@ -14,24 +14,27 @@ const PriceChart = () => {
     state.toggleInverted,
   ]);
   return (
-    <>
-      <div className='flex items-center rounded-t-xxl bg-dark-1 px-4 py-4 md:px-5'>
+    <div className=''>
+      <div className='flex items-center border-b border-gray-200 px-4 py-3 md:px-5'>
         <div className={clsx('flex gap-1', inverted && 'flex-row-reverse')}>
           <img src='/assets/images/cryptos/usdt.png' className='h-8 w-8' />
           <img src='/assets/images/cryptos/vnst.png' className='h-8 w-8' />
         </div>
-        <div className='mx-2 font-semibold text-dark-4'>
+        <div className='mx-2 font-semibold leading-5 text-gray'>
           {inverted ? 'VNST/USDT' : 'USDT/VNST'}
         </div>
-        <button className='text-dark-4' onClick={() => toggleInverted()}>
+        <button
+          className='text-gray hover:text-primary'
+          onClick={() => toggleInverted()}
+        >
           <ExchangeIcon className='h-5 w-5' />
         </button>
       </div>
-      <div className='price-chart mt-[1px] rounded-b-xxl bg-dark-1 py-4 md:py-5'>
+      <div className='price-chart flex flex-col md:gap-y-6 py-4 pt-3 md:pb-5'>
         <ChartHeader />
         <Chart />
       </div>
-    </>
+    </div>
   );
 };
 

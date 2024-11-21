@@ -7,7 +7,11 @@
 }
 
 #banner_merchant {
-  background-image: url(/assets/images/merchant/bg_banner.svg);
+  background-image: url(/assets/images/merchant/bg_banner.png);
+  @media only screen and (max-width: 992px) {
+    background-image: url(/assets/images/merchant/bg_bannerMB.png);
+    background-size: 100% 482px;
+  }
 }
 
 #total_merchant {
@@ -45,7 +49,6 @@
 }
 
 #table_ranking {
-  background-image: url(/assets/images/merchant/merchant_table.png);
   background-position: bottom;
   background-size: 100% 522px;
   background-repeat: no-repeat;
@@ -125,19 +128,14 @@
   }
 }
 
-.oxalus_merchant_bg {
-  background-image: url(/assets/images/merchant/oxalus_bg_mb.svg);
+.fizen_merchant_bg {
+  background-image: url(/assets/images/merchant/fizen_bg_mb.svg);
   background-repeat: no-repeat;
   background-size: cover;
 
   @screen lg {
-    background-image: url(/assets/images/merchant/oxalus_bg.svg);
+    background-image: url(/assets/images/merchant/fizen_bg.svg);
   }
-}
-
-.merchant_pool td,
-.merchant_pool th {
-  @apply border-b border-grayBackground bg-white text-dark-2;
 }
 
 @keyframes loop-in {
@@ -150,12 +148,12 @@
     scale: 1;
   }
   100% {
-    opacity: 1.2;
-    scale: 1.2;
+    opacity: 1.1;
+    scale: 1.1;
   }
 }
 .animation-logo:hover {
   opacity: 1;
   scale: 1;
-  animation: loop-in 1s linear infinite;
+  animation: loop-in 1s linear;
 }

@@ -11,6 +11,7 @@ import dayjs from '@/lib/dayjs';
 import { convertMoney } from '../home/constant';
 import { useSearchParams } from 'next/navigation';
 import ReactECharts from '../common/Charts';
+import colors from '@/colors';
 
 const BTN_FILTERS = [
   {
@@ -61,7 +62,10 @@ const MerchantChart = ({
         color: '#78909C',
       },
       crosshairs: {
-        show: false,
+        show: true,
+        stroke: {
+          color: colors.primary.dark,
+        },
       },
       labels: {
         show: true,
@@ -86,7 +90,7 @@ const MerchantChart = ({
         style: {
           colors: '#888888',
           fontSize: '12px',
-          fontWeight: 500,
+          fontWeight: 590,
         },
       },
       tooltip: {
@@ -138,6 +142,9 @@ const MerchantChart = ({
       tooltip: {
         enabled: false,
       },
+      axisBorder: {
+        show: true,
+      },
       labels: {
         formatter: function (value) {
           return numberFormater(value, 1);
@@ -145,7 +152,7 @@ const MerchantChart = ({
         style: {
           colors: ['#888888'],
           fontSize: '12px',
-          fontWeight: 500,
+          fontWeight: 590,
         },
       },
       min: (min: any) => {
@@ -158,6 +165,9 @@ const MerchantChart = ({
     },
     markers: {
       size: 4,
+      strokeColors: colors.primary.DEFAULT,
+      strokeOpacity: 0.2,
+      strokeWidth: 8,
     },
 
     grid: {
@@ -170,7 +180,7 @@ const MerchantChart = ({
       },
       xaxis: {
         lines: {
-          show: true,
+          show: false,
         },
       },
       row: {
@@ -243,35 +253,39 @@ const MerchantChart = ({
       type: 'gradient',
       gradient: {
         shadeIntensity: 1,
-        opacityFrom: 1,
+        opacityFrom: 0.8,
         opacityTo: 0,
-        gradientToColors: ['#00C096', '#00C096', '#00C096'],
+        gradientToColors: [
+          colors.primary.DEFAULT,
+          colors.primary.DEFAULT,
+          colors.primary.DEFAULT,
+        ],
         type: 'vertical',
       },
     },
-    colors: ['#00C096', '#00C096', '#00C096'],
+    colors: [
+      colors.primary.DEFAULT,
+      colors.primary.DEFAULT,
+      colors.primary.DEFAULT,
+    ],
   };
   return (
     <div className='h-full w-full'>
-      <div className='mx-10 h-4 rounded-t-xxl bg-white opacity-30 '></div>
-      <div className='mx-4 h-4 rounded-t-xxl bg-white opacity-50 '></div>
-      <div className='flex w-full flex-col items-end justify-start rounded-xxl bg-white pt-5'>
-        <div className='flex-rows flex  w-full items-center justify-around gap-x-1 px-2 sm:justify-end sm:gap-x-4 lg:px-8'>
+      <div className='mx-10 h-4 rounded-t-xxl bg-primary-light opacity-30'></div>
+      <div className='mx-4 h-4 rounded-t-xxl bg-primary-light opacity-50'></div>
+      <div className='flex w-full flex-col items-end justify-start rounded-xxl bg-white pt-5 shadow-lg'>
+        <div className='flex-rows flex  w-full items-center justify-start gap-x-2 px-2 sm:justify-end sm:gap-x-4 lg:px-8'>
           {BTN_FILTERS.map((item) => (
             <Button
               size='sm'
               key={item.value}
-              variant={item.value === filterType ? 'primary' : 'secondary'}
+              variant={item.value === filterType ? 'primary' : 'chip'}
               onClick={() =>
                 setFilterType(item.value as 'notionalValue' | 'count')
               }
-              className={clsx(
-                '!border-grayBackground bg-white !px-2 sm:!px-4',
-                {
-                  'whitespace-nowrap break-keep from-primary-dark  via-primary to-primary-dark bg-[length:200%] bg-left duration-300 hover:bg-gradient-to-r hover:bg-right hover:text-white hover:shadow-[0_0_26px_0_rgba(0,192,150,0.6)] hover:transition-[background-position]':
-                    item.value !== filterType,
-                }
-              )}
+              className={clsx('!px-2 sm:!px-4', {
+                'whitespace-nowrap break-keep ': item.value !== filterType,
+              })}
             >
               {t(item.title)}
             </Button>

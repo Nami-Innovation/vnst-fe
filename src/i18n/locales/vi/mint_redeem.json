@@ -4,8 +4,8 @@
   "history_table": {
     "transaction": "Giao dịch",
     "time": "Thời gian",
-    "empty": "Lịch sử giao dịch trống",
-    "connect_wallet_for": "để xem lịch sử giao dịch!"
+    "empty": "Không tìm thấy giao dịch",
+    "connect_wallet_for": "để xem lịch sử giao dịch"
   },
   "mint": {
     "title": "Mint",
@@ -13,6 +13,8 @@
     "covered_amount": "Khối lượng hỗ trợ (Mint)",
     "covered_price": "Vùng đệm hỗ trợ giá (Mint)",
     "covered_amount_tooltip": "Khối lượng VNST còn lại người dùng được hỗ trợ khi tỷ giá có sự biến động vượt vùng đệm hỗ trợ giá",
+    "fee": "Phí Mint",
+    "fee_tooltip": "Phí xử lý giao dịch của giao thức khi nhận VNST",
     "covered_price_tooltip": "Vùng giá được hỗ trợ khi Mint VNST để giảm thiểu sự tác động do tỷ giá trên VMM giảm quá biên độ Y% so với tỷ giá thị trường\n(Y): sẽ được điều chỉnh bởi VNST theo điều kiện thị trường thực tế."
   },
   "redeem": {
@@ -22,8 +24,8 @@
     "covered_price": "Vùng đệm hỗ trợ giá (Redeem)",
     "covered_amount_tooltip": "Khối lượng USDT còn lại người dùng được hỗ trợ khi tỷ giá có sự biến động ngoài vùng đệm hỗ trợ giá",
     "covered_price_tooltip": "Vùng giá được hỗ trợ khi Redeem VNST để giảm thiểu sự tác động do tỷ giá trên VMM tăng quá biên độ X% so với tỷ giá thị trường\n(X): sẽ được điều chỉnh bởi VNST theo điều kiện thị trường thực tế.",
-    "fee": "Phí giao dịch",
-    "fee_tooltip": "Phí xử lý giao dịch của hệ thống khi nhận USDT"
+    "fee": "Phí Redeem",
+    "fee_tooltip": "Phí xử lý giao dịch của giao thức khi nhận USDT"
   },
   "refresh_exchange_rate": "Cập nhật giá",
   "max": "Tối đa",
@@ -32,7 +34,7 @@
   "errors": {
     "min_amount": "Tối thiểu: {{amount}} {{symbol}}",
     "max_amount": "Tối đa: {{amount}} {{symbol}}",
-    "not_enough_balance": "Số dư không đủ!"
+    "not_enough_balance": "Số dư không đủ, vui lòng nạp thêm"
   },
   "price": "Giá",
   "confirm_modal": {
@@ -41,9 +43,9 @@
     "loading": "Đang tải...",
     "accept_legal_term": "Chấp thuận <a class='text-primary hover:underline' href='https://whitepaper.vnst.io/vnst_whitepaper_vi/khung-phap-ly' target='_blank'>Điều Khoản Pháp Lý VNST</a> với bản cập nhật mới nhất",
     "refer_exchange_rate": "Tham khảo cách tính tỷ giá",
-    "loading_desc": "Yêu cầu chuyển đổi đang được xử lý, vui lòng đợi!",
+    "loading_desc": "Yêu cầu chuyển đổi đang được xử lý, vui lòng đợi...",
     "transaction_success_title": "Thành công",
-    "transaction_failed_title": "Thất bại",
+    "transaction_failed_title": "Không thành công",
     "transaction_success_desc": {
       "mint": "Xin chúc mừng! Bạn đã nhận",
       "redeem": "Xin chúc mừng! Bạn đã nhận"
@@ -57,16 +59,17 @@
     "caller_lacks_necessary_permission": "Rất tiếc, bạn không có quyền truy cập. Vui lòng thử lại sau.",
     "market_price_below_covered_mint_price": "Hệ thống đang cập nhật Vùng đệm hỗ trợ giá (Mint).<br/>Vui lòng thử lại trong ít phút hoặc <a class='text-primary hover:underline' href='business@vnst.io'>liên hệ hỗ trợ ngay</a>",
     "market_price_above_covered_redeem_price": "Hệ thống đang cập nhật Vùng đệm hỗ trợ giá (Redeem).<br/> Vui lòng thử lại trong ít phút hoặc <a class='text-primary hover:underline' href='business@vnst.io'>liên hệ hỗ trợ ngay</a>",
-    "usdt_insufficient": "Số dư không đủ, vui lòng nạp thêm!",
+    "usdt_insufficient": "Số dư không đủ, vui lòng nạp thêm",
     "min_usdt_amount": "Tối thiểu: 5 USDT",
     "something_went_wrong": "Đã xảy ra sự cố. Vui lòng thử lại sau.",
     "max_usdt_amount": "Vượt quá số lượng USDT cho phép",
     "out_of_covered_mint_amount": "Khối lượng hỗ trợ khi mint hiện tại không khả dụng, vui lòng đợi ít phút!",
-    "vnst_insufficient": "Số dư không đủ, vui lòng nạp thêm!",
+    "vnst_insufficient": "Số dư không đủ, vui lòng nạp thêm",
     "min_vnst_amount": "Tối thiểu: 100,000.00 VNST",
     "out_of_covered_redeem_amount": "Khối lượng hỗ trợ khi redeem hiện tại không khả dụng, vui lòng đợi ít phút!",
-    "user_rejected_error": "Yêu cầu chuyển đổi thất bại.<br/> Nguyên nhân: Người dùng từ chối xác thức trên Ví",
+    "user_rejected_error": "Yêu cầu chuyển đổi không thành công, vui lòng thử lại.",
     "chain_miss_match": "Thông báo<br/> Vui lòng lựa chọn mạng lưới phù hợp",
-    "insufficient_allowance": "ERC20: Hạn mức nhập vào chưa đủ!"
+    "insufficient_allowance": "ERC20: Hạn mức nhập vào chưa đủ!",
+    "function_unavailable": "Chức năng hiện không khả dụng"
   }
 }

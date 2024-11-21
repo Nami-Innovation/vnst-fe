@@ -1,5 +1,5 @@
-import { NOTIFICATION_TYPE } from '@/components/layout/Header/type';
 import { IDataResponse } from '@/types/common';
+import { NOTIFICATION_TYPE } from '@/types/notification';
 import axios from '@/utils/axios.base';
 
 export const getNotificationList: (params: {

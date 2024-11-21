@@ -12,6 +12,7 @@ type Props = {
   placement?: Placement;
   showArrow?: boolean;
   handleClose?: () => void;
+  setIsOpenRef?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const Popup = forwardRef(
@@ -21,8 +22,9 @@ const Popup = forwardRef(
       children,
       className,
       placement = 'bottom',
-      showArrow = true,
+      showArrow = false,
       handleClose = () => {},
+      setIsOpenRef,
     }: Props,
     ref
   ) => {
@@ -44,8 +46,12 @@ const Popup = forwardRef(
       placement,
     });
 
-    const toggle = (bool?: boolean) =>
+    const toggle = (bool?: boolean) => {
+      if (setIsOpenRef) {
+        setIsOpenRef((isOpen) => (bool !== undefined ? bool : !isOpen));
+      }
       setIsOpen((isOpen) => (bool !== undefined ? bool : !isOpen));
+    };
 
     useImperativeHandle(
       ref,
@@ -67,6 +73,9 @@ const Popup = forwardRef(
           !popperElement?.contains(event.target) &&
           !referenceElement?.contains(event.target)
         ) {
+          if (setIsOpenRef) {
+            setIsOpenRef(false);
+          }
           setIsOpen(false);
           handleClose();
         }
@@ -80,7 +89,12 @@ const Popup = forwardRef(
 
     useEffect(() => {
       if (!referenceElement) return;
-      const toggleOpen = () => setIsOpen((isOpen) => !isOpen);
+      const toggleOpen = () => {
+        if (setIsOpenRef) {
+          setIsOpenRef((isOpenRef) => !isOpenRef);
+        }
+        setIsOpen((isOpen) => !isOpen);
+      };
       referenceElement.addEventListener('mousedown', toggleOpen);
       return () => {
         referenceElement.removeEventListener('mousedown', toggleOpen);
@@ -93,7 +107,7 @@ const Popup = forwardRef(
         ref={setPopperElement}
         style={styles.popper}
         className={clsx(
-          'z-10 animate-fade rounded-md bg-dark-1 animate-duration-200 animate-once animate-ease-linear',
+          'z-10 animate-fade rounded-md border border-gray-200 bg-white shadow-lg animate-duration-200 animate-once animate-ease-linear',
           className
         )}
         {...attributes.popper}
@@ -103,7 +117,7 @@ const Popup = forwardRef(
           <div
             ref={setArrowElement}
             style={styles.arrow}
-            className='-top-2 select-none text-dark-1'
+            className='-top-2 select-none text-white'
           >
             <ChevronBottomTriangle className='h-4 w-4 rotate-180' />
           </div>

@@ -105,7 +105,7 @@ const Tooltip = forwardRef(
             ref={setPopperElement}
             style={styles.popper}
             className={clsx(
-              'z-10 mt-2.5 max-w-xs animate-fade rounded-md bg-primary-dark p-3 text-xs text-white animate-duration-200 animate-once animate-ease-linear',
+              'z-10 mt-2.5 max-w-xs animate-fade rounded-md bg-primary-dark p-3 text-xs font-semibold text-white animate-duration-200 animate-once animate-ease-linear',
               popperClassname
             )}
             {...attributes.popper}

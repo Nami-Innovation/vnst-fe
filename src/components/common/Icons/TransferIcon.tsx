@@ -10,14 +10,14 @@ const TransferIcon = () => {
       <path
         d='M10 4.8H2L3.5 3'
         stroke='currentColor'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
       <path
         d='M2 7.19995H10L8.5 8.99995'
         stroke='currentColor'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </svg>
   );

@@ -57,3 +57,11 @@ export type ResponseTotalContribution = {
 export interface ResponseLiquidData extends ResponseContributionHistory {
   type: 'OUT' | 'IN';
 }
+
+export interface ObjectMerchant {
+  address: string;
+  link: string;
+  integrationDate: string;
+  linkIOS: string;
+  linkAndroid: string;
+}

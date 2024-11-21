@@ -1,9 +1,9 @@
 {
   "connect_error": {
-    "default": "Connection failed, please try again!",
+    "default": "Connection failed, please try again.",
     "user_rejected": "Connection failed, user rejected the request."
   },
-  "connect_success": "Successfully connected!",
+  "connect_success": "Successfully connected",
   "connect_wallet": "Connect Wallet",
   "disconnect_wallet": "Disconnect Wallet",
   "balance": "Balance",
@@ -43,5 +43,12 @@
   "mint_success": "Mint Successful",
   "success_mint": "You have successfully minted",
   "success_redeem": "You have successfully redeemed",
-  "redeem_success": "Redeem Successful"
+  "redeem_success": "Redeem Successful",
+  "empty_search": "No records found for keyword '{{keywords}}'",
+  "select_lang": "Select Language",
+  "select_network": "Select Network",
+  "copy_link": "Copy link",
+  "to_bsc": "Go BSC Scan",
+  "to_ton_scan": "Go to Tonviewer",
+  "add_to_wallet": "Add to {{label}}"
 }

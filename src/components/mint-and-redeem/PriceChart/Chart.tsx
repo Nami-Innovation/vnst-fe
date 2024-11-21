@@ -45,9 +45,6 @@ const Chart = () => {
       fill: {
         type: 'gradient',
         gradient: {
-          shadeIntensity: 1,
-          opacityFrom: 1,
-          opacityTo: 1,
           colorStops: [
             {
               color: '#01C096',
@@ -65,7 +62,7 @@ const Chart = () => {
               offset: 100,
             },
           ],
-          //   stops: [100, 50, 0],
+          // stops: [100, 100, 100],
           type: 'vertical',
         },
       },
@@ -115,18 +112,18 @@ const Chart = () => {
             opacityTo: 1,
             colorStops: [
               {
-                color: colors.primary.dark,
+                color: colors.primary.DEFAULT,
                 opacity: 1,
-                offset: 0,
+                offset: 100,
               },
 
               {
                 color: colors.primary.DEFAULT,
                 opacity: 1,
-                offset: 52,
+                offset: 100,
               },
               {
-                color: colors.primary.light,
+                color: colors.primary.DEFAULT,
                 opacity: 1,
                 offset: 100,
               },
@@ -140,13 +137,15 @@ const Chart = () => {
             return formatNumber(val, inverted ? 8 : 2);
           },
           style: {
-            colors: colors.dark[4],
+            colors: colors.gray.DEFAULT,
             fontSize: '12px',
+            fontWeight: 590,
+            cssClass: 'text-chart',
           },
         },
         axisBorder: {
           show: true,
-          color: colors.dark[2],
+          color: colors.gray[200],
           width: 1,
         },
         forceNiceScale: true,
@@ -158,13 +157,15 @@ const Chart = () => {
         labels: {
           datetimeUTC: false,
           style: {
-            colors: colors.dark[4],
+            colors: colors.gray.DEFAULT,
             fontSize: '12px',
+            fontWeight: 590,
+            cssClass: 'text-chart',
           },
         },
         axisBorder: {
           show: true,
-          color: colors.dark[2],
+          color: colors.gray[200],
           strokeWidth: 1,
         },
         axisTicks: {
@@ -173,20 +174,26 @@ const Chart = () => {
         tooltip: {
           enabled: false,
         },
+        crosshairs: {
+          stroke: {
+            color: colors.primary.dark,
+          },
+        },
       },
       tooltip: {
-        theme: undefined,
+        theme: 'light',
         custom: function ({ seriesIndex, dataPointIndex, w }) {
           const item = series[seriesIndex].data[dataPointIndex] as any;
+          const string = inverted ? ' USDT/VNST' : ' VNST/USDT';
           if (!item) return null;
           return (
-            '<div class="bg-black">' +
-            '<div class="text-xs text-dark-3">' +
+            '<div class="bg-secondary-lightest">' +
+            '<div class="text-xs text-gray">' +
             dayjs(item.x).locale(lang).format('lll') +
             '</div>' +
             '<div class="text-primary font-semibold mt-2">' +
             formatNumber(item.y, inverted ? 8 : 3) +
-            ' USDT/VNST' +
+            string +
             '</div>' +
             '</div>'
           );
@@ -195,7 +202,7 @@ const Chart = () => {
       markers: {
         size: nums.length > 1 ? 0 : 5,
         strokeColors: colors.primary.DEFAULT,
-        strokeOpacity: 0.5,
+        strokeOpacity: 0.2,
         strokeWidth: 8,
         hover: {
           size: undefined,
@@ -208,14 +215,26 @@ const Chart = () => {
             show: true,
           },
         },
-        borderColor: colors.dark[2],
+        xaxis: {
+          lines: {
+            show: false,
+          },
+        },
+        borderColor: colors.gray[200],
+        show: true,
       },
     };
-  }, [series, lang]);
+  }, [series, lang, inverted]);
 
   return (
     <div className='pl-0 pr-2 md:pl-1.5 md:pr-4'>
-      <ApexCharts options={options} series={series} type='area' height={360} />
+      <ApexCharts
+        options={options}
+        series={series}
+        width={'100%'}
+        type='area'
+        height={390}
+      />
     </div>
   );
 };

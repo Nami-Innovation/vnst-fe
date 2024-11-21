@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import VolumeItem from './VolumeItem';
 import { getEventLogs } from '@/services/event-log.api';
 import { updateArray } from './constant';
+import { getBscAddressLink, getBscScanLink } from '@/utils/helper';
+import { formatGweiNumberStr } from '@/utils/format';
 
 const LIMIT_EVENT_LOGS = 20;
 const SlideVolume = () => {
@@ -44,7 +46,21 @@ const SlideVolume = () => {
             <div className='flex items-center'>
               {mintList?.map((ele: any, index) => (
                 <div key={index} className='px-2'>
-                  <VolumeItem volume={ele} />
+                  <VolumeItem
+                    type='mint'
+                    addressLink={getBscAddressLink(ele.returnValues?.[0])}
+                    amountIn={formatGweiNumberStr(ele.returnValues?.[1], 0)}
+                    amountOut={formatGweiNumberStr(ele.returnValues?.[2])}
+                    hash={ele.transactionHash}
+                    priceRate={formatGweiNumberStr(
+                      ele.returnValues?.market_price,
+                      2,
+                      6
+                    )}
+                    hashLink={getBscScanLink(ele.transactionHash)}
+                    time={Number(ele.returnValues?.[3])}
+                    walletAddress={ele.returnValues?.[0]}
+                  />
                 </div>
               ))}
             </div>
@@ -57,7 +73,21 @@ const SlideVolume = () => {
             <div className='flex items-center'>
               {redeemList.map((item: any, i) => (
                 <div key={i} className='px-2'>
-                  <VolumeItem volume={item} />
+                  <VolumeItem
+                    type='redeem'
+                    addressLink={getBscAddressLink(item.returnValues?.[0])}
+                    amountIn={formatGweiNumberStr(item.returnValues?.[1], 0)}
+                    amountOut={formatGweiNumberStr(item.returnValues?.[2])}
+                    hash={item.transactionHash}
+                    priceRate={formatGweiNumberStr(
+                      item.returnValues?.market_price,
+                      2,
+                      6
+                    )}
+                    hashLink={getBscScanLink(item.transactionHash)}
+                    time={Number(item.returnValues?.[3])}
+                    walletAddress={item.returnValues?.[0]}
+                  />
                 </div>
               ))}
             </div>

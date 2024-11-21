@@ -1,26 +1,3 @@
-#banner_mobile {
-  @media only screen and (max-width: 992px) {
-    background-image: url('/assets/images/bg_banner_mobile.png');
-    background-color: transparent;
-    background-repeat: no-repeat;
-    background-size: cover;
-    aspect-ratio: 3/6;
-    object-fit: cover;
-    border: transparent;
-    object-position: center;
-    background-position: center;
-  }
-}
-
-.bg-gradient-banner {
-  background: linear-gradient(
-    360deg,
-    rgba(0, 102, 102, 0.3) 0%,
-    rgba(0, 192, 150, 0.3) 52.6%,
-    rgba(142, 255, 233, 0.3) 100%
-  );
-}
-
 @keyframes loopRtl {
   from {
     transform: translateX(0px);
@@ -84,17 +61,6 @@
     display: inline-block;
     opacity: 0;
     filter: blur(4px);
-    font-size: 28px;
-    line-height: 1.2em;
-    @media only screen and (min-width: 400px) {
-      font-size: 30px;
-    }
-    @media only screen and (min-width: 768px) {
-      font-size: 48px;
-    }
-    @media only screen and (min-width: 992px) {
-      font-size: 54px;
-    }
   }
   span > br {
     display: block;
@@ -146,12 +112,11 @@
   }
 }
 
-#volume-content {
-  background-image: url(/assets/images/footer-pattern-dot.png);
-  background-position-x: center;
-  background-position-y: bottom;
-
-  @media only screen and (max-width: 992px) {
-    background-image: url(/assets/images/bg-volume-mobile.png);
+@media only screen and (max-width: 768px) {
+  .content-animation {
+    span {
+      font-size: 32px !important;
+      line-height: 32px;
+    }
   }
 }

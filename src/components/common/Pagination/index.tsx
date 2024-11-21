@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import Button from '../Button';
 import ChevronLeft from '../Icons/ChevronLeft';
 import ChevronRight from '../Icons/ChevronRight';
+import ButtonPagination from './ButtonPagination';
 // import { Arrow, IconArrowDouble } from 'components/atoms/Icons';
 
 type Props = {
@@ -39,79 +40,87 @@ const Pagination = ({
   return (
     <div
       className={clsx(
-        'flex items-center justify-center gap-x-2',
+        'flex items-center justify-center gap-x-3',
         { 'pointer-events-none opacity-0': totalPages <= 1 },
         className
       )}
     >
       {hasArrowBtn && (
-        <Button
-          variant={'secondary'}
-          size='sm'
+        <ButtonPagination
+          variant={'inactive'}
+          size='lg'
           className={clsx('!px-1.5 ', classArrow, {
-            'border-dark-2 disabled:border disabled:bg-dark-1 disabled:text-dark-3 disabled:opacity-60':
+            'disabled:border disabled:border-gray-200 disabled:bg-white disabled:text-gray disabled:opacity-30':
               !classArrow,
           })}
           disabled={currentPage === 1}
           onClick={() => onChangePage(currentPage - 1)}
         >
           <ChevronLeft width={20} height={20} />
-        </Button>
+        </ButtonPagination>
       )}
 
       {startPage > 1 && (
         <>
-          <Button
-            variant={currentPage === 1 ? 'primary' : 'secondary'}
-            size='sm'
-            className={clsx('!px-3', classButton)}
+          <ButtonPagination
+            variant={currentPage === 1 ? 'active' : 'inactive'}
+            size='lg'
+            className={clsx('!px-2.5', classButton)}
             onClick={() => onChangePage(1)}
           >
             1
-          </Button>
-          {startPage > 2 && <div>...</div>}
+          </ButtonPagination>
+          {startPage > 2 && (
+            <ButtonPagination variant='inactive' size={'lg'}>
+              ...
+            </ButtonPagination>
+          )}
         </>
       )}
       {pages.map((page, index) => {
         const isSelected = currentPage === page;
         return (
-          <Button
+          <ButtonPagination
             key={index}
-            variant={isSelected ? 'primary' : 'secondary'}
-            size='sm'
-            className={clsx('!px-3', classButton)}
+            variant={isSelected ? 'active' : 'inactive'}
+            size='lg'
+            className={clsx('!px-2.5', classButton)}
             onClick={() => onChangePage(page)}
           >
             {page}
-          </Button>
+          </ButtonPagination>
         );
       })}
-      {endPage < totalPages - 1 && <div>...</div>}
+      {endPage < totalPages - 1 && (
+        <ButtonPagination variant='inactive' size={'lg'}>
+          ...
+        </ButtonPagination>
+      )}
       {endPage < totalPages && (
         <>
-          <Button
-            variant={currentPage === totalPages ? 'primary' : 'secondary'}
-            size='sm'
-            className={clsx('!px-3', classButton)}
+          <ButtonPagination
+            variant={currentPage === totalPages ? 'active' : 'inactive'}
+            size='lg'
+            className={clsx('!px-2.5', classButton)}
             onClick={() => onChangePage(totalPages)}
           >
             {totalPages}
-          </Button>
+          </ButtonPagination>
         </>
       )}
       {hasArrowBtn && (
-        <Button
-          variant={'secondary'}
-          size='sm'
+        <ButtonPagination
+          variant={'inactive'}
+          size='lg'
           className={clsx('!px-1.5 ', classArrow, {
-            'border-dark-2 disabled:border disabled:bg-dark-1 disabled:text-dark-3 disabled:opacity-60':
+            'disabled:border disabled:border-gray-200 disabled:bg-white disabled:text-gray disabled:opacity-30':
               !classArrow,
           })}
           disabled={currentPage === totalPages}
           onClick={() => onChangePage(currentPage + 1)}
         >
           <ChevronRight width={20} height={20} />
-        </Button>
+        </ButtonPagination>
       )}
     </div>
   );

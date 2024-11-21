@@ -5,6 +5,7 @@ export type Props = {
   valueLength: number;
   onChange: (value: string) => void;
   classNameInput: string;
+  submitForm: () => void;
 };
 
 export default function OtpInput({
@@ -12,6 +13,7 @@ export default function OtpInput({
   valueLength,
   onChange,
   classNameInput,
+  submitForm,
 }: Props) {
   const valueItems = useMemo(() => {
     const valueArray = value.split('');
@@ -55,20 +57,24 @@ export default function OtpInput({
     let targetValue = target.value.trim();
     const isTargetValueDigit = RE_DIGIT.test(targetValue);
 
+    // Ignore non-digit and non-empty inputs
     if (!isTargetValueDigit && targetValue !== '') {
       return;
     }
 
     const nextInputEl = target.nextElementSibling as HTMLInputElement | null;
 
+    // Ignore if the input is not a digit and the next input is not empty
     if (!isTargetValueDigit && nextInputEl && nextInputEl.value !== '') {
       return;
     }
 
+    // Set targetValue to space if not digit
     targetValue = isTargetValueDigit ? targetValue : ' ';
 
     const targetValueLength = targetValue.length;
 
+    // If a single digit is entered
     if (targetValueLength === 1) {
       const newValue =
         value.substring(0, idx) + targetValue + value.substring(idx + 1);
@@ -79,9 +85,18 @@ export default function OtpInput({
       }
 
       focusToNextInput(target);
+
+      // If the concatenated value reaches the desired length, submit the form
+      if (newValue.length === valueLength && newValue === value) {
+        // Replace with your submit function
+        setTimeout(() => submitForm(), 200);
+      }
+
+      // If the input matches the total desired value length
     } else if (targetValueLength === valueLength) {
       onChange(targetValue);
       target.blur();
+      setTimeout(() => submitForm(), 200);
     }
   };
   const inputOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -125,8 +140,37 @@ export default function OtpInput({
     target.setSelectionRange(0, target.value.length);
   };
 
+  const getOTPValue = () => (value ? value.toString().split('') : []);
+  const handlePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
+    event.preventDefault();
+
+    const otp = getOTPValue();
+    let nextActiveInput = 0;
+
+    // Get pastedData in an array of max size (num of inputs - current position)
+    const pastedData = event.clipboardData
+      .getData('text/plain')
+      .slice(0, 6)
+      .split('');
+
+    // Prevent pasting if the clipboard data contains non-numeric values for number inputs
+    if (pastedData.some((value) => isNaN(Number(value)))) {
+      return;
+    }
+
+    // Paste data from focused input onwards
+    for (let pos = 0; pos < 6; ++pos) {
+      if (pos >= 0 && pastedData.length > 0) {
+        otp[pos] = pastedData.shift() ?? '';
+        nextActiveInput++;
+      }
+    }
+
+    onChange(otp.join(''));
+  };
+
   return (
-    <div className='flex w-full items-center justify-around gap-x-4'>
+    <div className='flex w-full items-center justify-around gap-x-3'>
       {valueItems.map((digit, idx) => (
         <input
           key={idx}
@@ -141,6 +185,7 @@ export default function OtpInput({
           onChange={(e) => inputOnChange(e, idx)}
           onKeyDown={inputOnKeyDown}
           onFocus={inputOnFocus}
+          onPaste={handlePaste}
         />
       ))}
     </div>

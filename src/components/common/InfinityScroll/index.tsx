@@ -299,8 +299,8 @@ export default class InfiniteScroll extends Component<Props, State> {
       this.props.height || this._scrollableNode
         ? (event.target as HTMLElement)
         : document.documentElement.scrollTop
-        ? document.documentElement
-        : document.body;
+          ? document.documentElement
+          : document.body;
 
     // return immediately if the action has already been triggered,
     // prevents multiple triggers.
@@ -348,12 +348,14 @@ export default class InfiniteScroll extends Component<Props, State> {
       >
         <div
           className={`infinite-scroll-component ${this.props.className || ''}`}
+          // @ts-ignore
           ref={(infScroll: HTMLDivElement) => (this._infScroll = infScroll)}
           style={style}
         >
           {this.props.pullDownToRefresh && (
             <div
               style={{ position: 'relative' }}
+              // @ts-ignore
               ref={(pullDown: HTMLDivElement) => (this._pullDown = pullDown)}
             >
               <div

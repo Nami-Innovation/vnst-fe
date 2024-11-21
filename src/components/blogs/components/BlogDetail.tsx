@@ -18,7 +18,7 @@ type BlogDetailProps = {
 const BlogDetail = ({ data }: BlogDetailProps) => {
   return (
     <main className='bg-blogs w-full'>
-      <section className='pb-[72px] pt-10'>
+      <section className='pb-20 pt-5 lg:pt-[52px]'>
         <div className='mx-auto max-w-screen-xl px-4 xl:px-0'>
           <div className='mb-3 md:mb-4'>
             <BackToSection />

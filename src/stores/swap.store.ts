@@ -1,11 +1,10 @@
 import { create } from 'zustand';
 import { produce } from 'immer';
-import { readContracts } from 'wagmi';
-import { RATE_DECIMAL, VNST_ADDRESS, VNST_DECIMAL } from '@/web3/constants';
-import { vnstABI } from '@/web3/abi';
-import { formatUnits } from 'viem';
 import { getOtcDelta } from '@/services/contract.api';
-import { readContract } from '@wagmi/core';
+import { loadContractInfoEVM, loadMarketPriceEVM } from '@/web3/evm/utils';
+import { Chain } from '@/web3/constants';
+import { TonClient } from '@ton/ton';
+import { loadContractInfoTon, loadMarketPriceTON } from '@/web3/ton/utils';
 
 type Store = {
   marketPrice?: number;
@@ -20,14 +19,15 @@ type Store = {
   vnstPool?: number;
   loading: boolean;
   otcDelta: number;
-  load: () => Promise<void>;
+  mintFee: number;
+  mintLimitVerify: number;
+  redeemLimitVerify: number;
+  // mint, redeem status (just on TON)
+  mintStatus: boolean;
+  redeemStatus: boolean;
+  loadContractInfo: (chain: Chain, tonClient?: TonClient) => Promise<void>;
   fetchOtcDelta: () => Promise<void>;
-  loadMarketPrice: () => Promise<void>;
-};
-
-const contractToken = {
-  address: VNST_ADDRESS,
-  abi: vnstABI,
+  loadMarketPrice: (chain: Chain, tonClient?: TonClient) => Promise<void>;
 };
 
 const useSwapStore = create<Store>()((set) => ({
@@ -36,157 +36,43 @@ const useSwapStore = create<Store>()((set) => ({
   mintLimitMax: 2000,
   redeemLimitMax: 50000000,
   otcDelta: 0,
-  load: async () => {
-    set(
-      produce((state) => {
-        state.loading = true;
-      })
-    );
+  mintFee: 0,
+  mintLimitVerify: 0,
+  redeemLimitVerify: 0,
+  mintStatus: true,
+  redeemStatus: true,
+  loadContractInfo: async (chain: Chain, tonClient?: TonClient) => {
+    set({ loading: true });
+
     const startTime = Date.now();
     try {
-      const [
-        rCenterResult,
-        redeemCoveredPriceResult,
-        mintCoveredPriceResult,
-        redeemCoveredAmountResult,
-        mintCoveredAmountResult,
-        vnstPoolResult,
-        usdtPoolResult,
-        redeemFeeResult,
-        mintLimitMaxResult,
-        redeemLimitMaxResult,
-      ] = await readContracts({
-        contracts: [
-          {
-            ...contractToken,
-            functionName: 'market_price',
-          },
-          {
-            ...contractToken,
-            functionName: 'redeem_covered_price',
-          },
-          {
-            ...contractToken,
-            functionName: 'mint_covered_price',
-          },
-          {
-            ...contractToken,
-            functionName: 'redeem_covered_amount',
-          },
-          {
-            ...contractToken,
-            functionName: 'mint_covered_amount',
-          },
-          {
-            ...contractToken,
-            functionName: 'vnst_pool',
-          },
-          {
-            ...contractToken,
-            functionName: 'usdt_pool',
-          },
-          {
-            ...contractToken,
-            functionName: 'redeem_fee',
-          },
-          {
-            ...contractToken,
-            functionName: 'max_mint_limit',
-          },
-          {
-            ...contractToken,
-            functionName: 'max_redeem_limit',
-          },
-        ],
-      });
+      let contractInfo: Record<string, number | boolean> = {};
+      if (chain === Chain.TON) {
+        if (!tonClient) {
+          throw new Error('TonClient is required');
+        }
+        contractInfo = await loadContractInfoTon(tonClient);
 
+        console.log('contractInfo', contractInfo);
+      } else {
+        contractInfo = await loadContractInfoEVM();
+      }
       const endTime = Date.now();
 
-      set(
-        produce((state) => {
-          if (rCenterResult.status === 'success') {
-            state.marketPrice = Number(
-              formatUnits(rCenterResult.result, RATE_DECIMAL)
-            );
-          }
+      set(contractInfo);
 
-          if (redeemCoveredPriceResult.status === 'success') {
-            state.redeemCoveredPrice = Number(
-              formatUnits(redeemCoveredPriceResult.result, RATE_DECIMAL)
-            );
-          }
-
-          if (mintCoveredPriceResult.status === 'success') {
-            state.mintCoveredPrice = Number(
-              formatUnits(mintCoveredPriceResult.result, RATE_DECIMAL)
-            );
-          }
-
-          if (redeemCoveredAmountResult.status === 'success') {
-            state.redeemCoveredAmount = Number(
-              formatUnits(redeemCoveredAmountResult.result, VNST_DECIMAL)
-            );
-          }
-
-          if (mintCoveredAmountResult.status === 'success') {
-            state.mintCoveredAmount = Number(
-              formatUnits(mintCoveredAmountResult.result, VNST_DECIMAL)
-            );
-          }
-
-          if (vnstPoolResult.status === 'success') {
-            state.vnstPool = Number(
-              formatUnits(vnstPoolResult.result, VNST_DECIMAL)
-            );
-          }
-
-          if (usdtPoolResult.status === 'success') {
-            state.usdtPool = Number(
-              formatUnits(usdtPoolResult.result, VNST_DECIMAL)
-            );
-          }
-
-          if (redeemFeeResult.status === 'success') {
-            state.redeemFeeRate = Number(
-              formatUnits(redeemFeeResult.result, RATE_DECIMAL)
-            );
-          }
-
-          if (mintLimitMaxResult.status === 'success') {
-            state.mintLimitMax = Number(
-              formatUnits(mintLimitMaxResult.result, VNST_DECIMAL)
-            );
-          }
-
-          if (redeemLimitMaxResult.status === 'success') {
-            state.redeemLimitMax = Number(
-              formatUnits(redeemLimitMaxResult.result, VNST_DECIMAL)
-            );
-          }
-        })
-      );
       const duration = endTime - startTime;
+
       if (duration < 500) {
         setTimeout(() => {
-          set(
-            produce((state) => {
-              state.loading = false;
-            })
-          );
+          set({ loading: false });
         }, 500 - duration);
       } else {
-        set(
-          produce((state) => {
-            state.loading = false;
-          })
-        );
+        set({ loading: false });
       }
     } catch (error) {
-      set(
-        produce((state) => {
-          state.loading = false;
-        })
-      );
+      console.error('loadContractInfo Error: ', error);
+      set({ loading: false });
     }
   },
   fetchOtcDelta: async () => {
@@ -201,16 +87,21 @@ const useSwapStore = create<Store>()((set) => ({
       console.error('Error: ', error);
     }
   },
-  loadMarketPrice: async () => {
-    const marketPrice = await readContract({
-      ...contractToken,
-      functionName: 'market_price',
-    });
-    set(
-      produce((state) => {
-        state.marketPrice = Number(formatUnits(marketPrice, RATE_DECIMAL));
-      })
-    );
+  loadMarketPrice: async (chain: Chain, tonClient?: TonClient) => {
+    try {
+      let marketPrice = 0;
+      if (chain === Chain.TON) {
+        if (!tonClient) {
+          throw new Error('TonClient is required');
+        }
+        marketPrice = await loadMarketPriceTON(tonClient);
+      } else {
+        marketPrice = await loadMarketPriceEVM();
+      }
+      set({ marketPrice });
+    } catch (error) {
+      console.error('loadMarketPrice Error: ', error);
+    }
   },
 }));
 

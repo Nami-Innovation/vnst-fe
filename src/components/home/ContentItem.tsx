@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
 import Button from '../common/Button';
@@ -39,47 +39,43 @@ const ContentItem = ({ title, imageInfo, content, btnTitle, index }: Props) => {
     }
   };
   return (
-    <div className='h-full w-full'>
-      <div className='mx-10 h-4 rounded-t-xxl bg-white opacity-30 '></div>
-      <div className='mx-4 h-4 rounded-t-xxl bg-white opacity-50 '></div>
-      <div className='relative h-full w-full rounded-xxl bg-white '>
+    <div className='h-full w-full rounded-xxl border border-gray-200 bg-white  shadow-md'>
+      <div className='relative h-full w-full pb-6 pt-2 lg:pb-8 lg:pt-3'>
         <Image
           src={imageInfo.imgSrc}
           alt={imageInfo.alt}
           className={clsx(
-            'translate absolute w-1/2 -translate-y-1/2 translate-x-1/2 object-cover lg:w-[60%] lg:translate-x-1/3'
+            'translate absolute right-2 h-[140px] w-[127px] -translate-y-1/4 object-cover lg:h-[177px] lg:w-[160px] lg:-translate-y-1/3'
           )}
-          width={222}
-          height={222}
+          width={160}
+          height={177}
         />
-        <div className='flex h-full flex-col items-center justify-between px-4 pb-9 pt-20 lg:pt-24'>
-          <div className='text-center'>
-            <p className='font-sf-pro-expanded text-2xl font-bold text-dark-5 lg:text-[30px]'>
-              {title}
-            </p>
-            <p className='mt-4 text-sm font-semibold text-dark-3 lg:text-base'>
+        <div className='flex h-full flex-col items-start justify-between  gap-y-5 px-2 lg:px-3'>
+          <p className='w-full rounded-lg bg-gray-300 px-4 pb-3 pt-12 text-start font-sf-pro-expanded text-2xl font-bold leading-[30px] text-secondary-darkest lg:pb-4 lg:pt-[69px] lg:text-[30px] lg:leading-9'>
+            {title}
+          </p>
+          <div className=''>
+            <p className='px-3 text-sm font-semibold leading-[18px] text-gray lg:text-base lg:leading-5'>
               {content}
             </p>
           </div>
-          <div className='flex w-full items-center justify-center'>
+          <div className='flex w-full items-start justify-start px-3'>
             {index === 0 ? (
               <Link
                 href={LINK_DIRECT[lang as keyof LANGUAGE].vmm}
                 target='_blank'
               >
-                <Button size='md' className='' variant='primary'>
+                <div className='w-max rounded-[8px] border border-primary px-5 py-2.5 font-semibold leading-5 text-primary-dark hover:bg-primary hover:text-white'>
                   {btnTitle}
-                </Button>
+                </div>
               </Link>
             ) : (
-              <Button
-                size='md'
-                className=''
+              <button
+                className='rounded-[8px] border border-primary px-5 py-2.5 font-semibold leading-5 text-primary-dark hover:bg-primary hover:text-white'
                 onClick={handleClick}
-                variant='primary'
               >
                 {btnTitle}
-              </Button>
+              </button>
             )}
           </div>
         </div>

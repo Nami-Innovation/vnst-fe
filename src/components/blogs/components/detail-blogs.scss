@@ -4,7 +4,7 @@
   }
 
   td {
-    background-color: #fff;
+    background-color: theme('colors.gray.DEFAULT');
     padding: 1rem;
   }
 
@@ -29,7 +29,8 @@
     margin: 0 0 0.3em;
     line-height: 1.3em;
     text-rendering: optimizeLegibility;
-    color: white;
+    color: theme('colors.black');
+    font-family: var(--font-sfpro-expanded);
   }
 
   dl,
@@ -42,11 +43,11 @@
   b,
   strong {
     font-weight: bold;
-    color: #fff;
+    color: theme('colors.gray.DEFAULT');
   }
 
   a {
-    color: #00c096;
+    color: theme('colors.primary.DEFAULT');
     word-break: break-word;
     &:hover {
       text-decoration: underline;
@@ -55,7 +56,10 @@
 
   img {
     margin: auto;
-    border-radius: 10px;
+    border-radius: 20px;
+    @media only screen and (max-width: 986px) {
+      border-radius: 12px;
+    }
   }
 
   h1 {
@@ -78,7 +82,7 @@
   h3 {
     font-size: 20px;
     letter-spacing: -0.016em;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 36px;
     margin-bottom: 10px;
   }
@@ -86,7 +90,7 @@
   h4 {
     font-size: 18px;
     letter-spacing: -0.013em;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 30px;
     margin-bottom: 8px;
   }
@@ -94,7 +98,7 @@
   p {
     font-size: 16px;
     line-height: 24px;
-    color: inherit;
+    color: currentColor;
   }
 
   ul {
@@ -106,13 +110,12 @@
     font-size: 16px;
     line-height: 24px;
     margin: 4px 0;
-    color: inherit;
+    color: currentColor;
   }
 
   iframe {
     width: 100%;
     height: 380px;
-    margin: 40px 0;
   }
 
   figure {
@@ -120,7 +123,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 40px 0;
   }
 
   figcaption {
@@ -244,7 +246,7 @@
     margin: 8px 0 0 0;
     padding: 8px 12px;
     border: none;
-    font-family: inherit;
+    font-family: currentColor;
     font-size: 1.15em;
     font-weight: 700;
     line-height: 1.15em;
@@ -261,7 +263,7 @@
   .kg-audio-current-time {
     min-width: 38px;
     padding: 0 4px;
-    font-family: inherit;
+    font-family: currentColor;
     font-size: 0.85em;
     font-weight: 500;
     line-height: 1.4em;
@@ -270,8 +272,8 @@
 
   .kg-audio-time {
     width: 56px;
-    color: #ababab;
-    font-family: inherit;
+    color: theme('colors.gray.DEFAULT');
+    font-family: currentColor;
     font-size: 0.85em;
     font-weight: 500;
     line-height: 1.4em;
@@ -316,7 +318,7 @@
   .kg-audio-playback-rate {
     min-width: 37px;
     padding: 0 4px;
-    font-family: inherit;
+    font-family: currentColor;
     font-size: 0.85em;
     font-weight: 600;
     line-height: 1.4em;
@@ -674,7 +676,7 @@
     border-radius: 3px;
     border: 1px solid rgb(124 139 154 / 25%);
     overflow: hidden;
-    color: inherit;
+    color: currentColor;
   }
 
   .kg-bookmark-content {
@@ -903,7 +905,7 @@
     display: flex;
     align-items: stretch;
     justify-content: space-between;
-    color: inherit;
+    color: currentColor;
     padding: 6px;
     min-height: 92px;
     border: 1px solid rgb(124 139 154 / 25%);
@@ -1348,7 +1350,7 @@
       0 0 1px rgb(0 0 0 / 40%);
     width: 100%;
     max-width: 512px;
-    color: #222;
+    color: theme('colors.black');
     background: #fff;
     border-radius: 5px;
     transition: none;
@@ -1376,14 +1378,14 @@
   }
 
   .kg-nft-header h4.kg-nft-title {
-    font-family: inherit;
+    font-family: currentColor;
     font-size: 19px;
     font-weight: 700;
     line-height: 1.3em;
     min-width: unset;
     max-width: unset;
     margin: 0;
-    color: #222;
+    color: theme('colors.black');
   }
 
   .kg-nft-opensea-logo {
@@ -1393,23 +1395,23 @@
   }
 
   .kg-nft-creator {
-    font-family: inherit;
+    font-family: currentColor;
     line-height: 1.4em;
     margin: 4px 0 0;
-    color: #ababab;
+    color: theme('colors.gray.DEFAULT');
   }
 
   .kg-nft-creator span {
     font-weight: 500;
-    color: #222;
+    color: theme('colors.black');
   }
 
   .kg-nft-card p.kg-nft-description {
-    font-family: inherit;
+    font-family: currentColor;
     font-size: 14px;
     line-height: 1.4em;
     margin: 20px 0 0;
-    color: #222;
+    color: theme('colors.black');
   }
 
   // product css
@@ -1742,7 +1744,7 @@
     min-width: 38px;
     padding: 0 4px;
     color: #fff;
-    font-family: inherit;
+    font-family: currentColor;
     font-size: 0.85em;
     font-weight: 500;
     line-height: 1.4em;
@@ -1751,7 +1753,7 @@
 
   .kg-video-time {
     color: rgba(255, 255, 255, 0.6);
-    font-family: inherit;
+    font-family: currentColor;
     font-size: 0.85em;
     font-weight: 500;
     line-height: 1.4em;
@@ -1802,7 +1804,7 @@
     min-width: 37px;
     padding: 0 4px;
     color: #fff;
-    font-family: inherit;
+    font-family: currentColor;
     font-size: 0.85em;
     font-weight: 600;
     line-height: 1.4em;

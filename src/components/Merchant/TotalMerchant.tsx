@@ -22,7 +22,7 @@ const TotalMerchant = () => {
             <p className="text-white text-center font-semibold text-sm lg:text-base w-full capitalize">
               {t(item.title)}
             </p>
-            <p className="text-gradient lg:text-[30px] text-lg leading-9 font-bold">
+            <p className="text-gradient lg:text-[30px] text-lg leading-9 font-semibold">
               {formatNumber(item.content)}
             </p>
             <div className="circle-shadow absolute bottom-0"></div>

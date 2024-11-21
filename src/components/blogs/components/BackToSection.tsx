@@ -37,9 +37,9 @@ const BackToSection = () => {
       </Button> */}
       <button
         onClick={handleGoBack}
-        className='flex items-center text-sm font-semibold leading-4 text-dark-4 hover:text-primary'
+        className='flex items-center text-sm font-semibold leading-[18px] text-gray hover:text-primary'
       >
-        <ChevronLeftTriangle />
+        <ChevronLeftTriangle className='h-4 w-4 lg:h-3 lg:w-3' />
         {t('blogs:back_to_page')}
       </button>
     </div>

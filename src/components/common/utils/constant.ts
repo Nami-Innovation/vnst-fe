@@ -27,7 +27,7 @@ export const handleParseData = (post: any[], featurePost: any[]) => {
       .filter((item) => !featurePost.find((ele) => ele?.id === item.id))
       .slice(0, 3 - featurePost.length);
     newFeaturePost = [...featurePost, ...sortPost];
-    newPost = newPost.slice(3 - featurePost.length, post.length);
+    // newPost = newPost.slice(3 - featurePost.length, post.length);
     return {
       posts: newPost,
       featurePost: newFeaturePost,

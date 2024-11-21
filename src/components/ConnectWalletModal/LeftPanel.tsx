@@ -3,7 +3,7 @@ import Wallets, {
   WalletConfig,
   WalletLogos,
   isWalletBrowserSupported,
-} from '@/web3/wallets';
+} from '@/web3/evm/wallets';
 import clsx from 'clsx';
 import React from 'react';
 import { Connector } from 'wagmi';
@@ -28,20 +28,22 @@ const Item = ({
   return (
     <button
       className={clsx(
-        'flex items-center rounded-md border bg-dark-1 px-3 py-3 text-dark-3 md:py-2',
+        'flex items-center rounded-md border px-2 py-1',
         active && !disabled
-          ? 'bg-black-border-gradient text-white'
-          : 'border-dark-1 md:border-black',
+          ? 'bg-primary text-white'
+          : 'bg-gray-300 text-gray lg:bg-white',
         disabled
           ? 'order-1 bg-dark-1 opacity-40'
-          : 'hover:bg-black-border-gradient hover:text-white',
+          : 'hover:bg-primary hover:text-white',
         className
       )}
       disabled={disabled}
       onClick={onClick}
     >
-      <img src={logoUrl} className='h-6 w-6' alt={connector.name} />
-      <div className='ml-2'>{connector.name}</div>
+      <img src={logoUrl} className='h-8 w-8 p-1' alt={connector.name} />
+      <div className='ml-2 text-sm font-semibold leading-[18px] lg:text-base lg:leading-5'>
+        {connector.name}
+      </div>
     </button>
   );
 };
@@ -58,7 +60,7 @@ const LeftPanel = ({ className, active, setActive }: Props) => {
   return (
     <div
       className={clsx(
-        'flex flex-col gap-y-4 rounded-md p-0 md:bg-black md:p-4',
+        'flex flex-col gap-y-4 rounded-md p-0 md:bg-gray-300 md:p-4',
         className
       )}
     >

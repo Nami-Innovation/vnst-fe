@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import dayjs from '@/lib/dayjs';
 import React, { useEffect, useMemo } from 'react';
 import useLang from '@/hooks/useLang';
+import { useActiveChain } from '@/stores/chain.store';
 
 const RangeButtons = [
   {
@@ -29,6 +30,7 @@ const RangeButtons = [
 
 const ChartHeader = () => {
   const lang = useLang();
+  const chain = useActiveChain();
   const [
     data,
     currentTime,
@@ -51,8 +53,8 @@ const ChartHeader = () => {
   let firstPrice = data[0]?.price;
 
   useEffect(() => {
-    fetchData('usdt', range);
-  }, [range]);
+    fetchData('usdt', range, chain);
+  }, [range, chain]);
 
   let { price, time } = useMemo(() => {
     let price = marketPrice;
@@ -70,7 +72,7 @@ const ChartHeader = () => {
     }
 
     return {
-      time: time.locale(lang).format('lll'),
+      time: `${time.locale(lang).format('lll')} (UTC)`,
       price,
     };
   }, [data, dataPointIndex, currentTime, marketPrice, lang]);
@@ -90,17 +92,17 @@ const ChartHeader = () => {
         {price && price > 0 && (
           <>
             <div className='flex items-baseline gap-x-2'>
-              <div className='font-sf-pro-expanded text-2xl font-bold md:text-[30px]'>
+              <div className='font-sf-pro-expanded text-2xl font-bold leading-9 text-black md:text-[30px]'>
                 {formatNumber(price, inverted ? 7 : 2)}
               </div>
-              <div className='text-xs text-dark-4'>
+              {/* <div className='text-xs font-semibold text-gray'>
                 {inverted ? 'VNST/USDT' : 'USDT/VNST'}
-              </div>
+              </div> */}
               {firstPrice && (
                 <div
                   className={clsx(
-                    'text-xs',
-                    diff >= 0 ? 'text-primary' : 'text-danger'
+                    'text-xs font-semibold',
+                    diff >= 0 ? 'text-primary' : 'text-error-100'
                   )}
                 >
                   {`${diff >= 0 ? '+' : '-'}${formatNumber(
@@ -111,18 +113,20 @@ const ChartHeader = () => {
                 </div>
               )}
             </div>
-            <div className='mt-2 text-xs text-dark-4'>{time}</div>
+            <div className='mt-2 text-xs font-semibold leading-4 text-gray'>
+              {time}
+            </div>
           </>
         )}
       </div>
-      <div className='flex gap-3 md:mt-1'>
+      <div className='flex w-full items-end justify-end gap-x-2 md:mt-1 lg:w-max'>
         {RangeButtons.map(({ value, title }) => (
           <Button
             key={value}
             size='sm'
-            variant={range === value ? 'primary' : 'secondary'}
+            variant={range === value ? 'primary' : 'chip'}
             onClick={() => setRange(value)}
-            className='!px-3'
+            className='!px-3 font-semibold '
           >
             {title}
           </Button>

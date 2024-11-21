@@ -1,15 +1,29 @@
-import { Address } from 'viem';
+import BNBChainIcon from '@/components/common/Icons/chains/BNBChainIcon';
+import TONChainIcon from '@/components/common/Icons/chains/TONChainIcon';
 
-export const VNST_ADDRESS: Address = process.env
-  .NEXT_PUBLIC_VNST_ADDRESS as Address;
+export enum Chain {
+  BNB = 'BNB',
+  TON = 'TON',
+}
 
-export const USDT_ADDRESS: Address = process.env
-  .NEXT_PUBLIC_USDT_ADDRESS as Address;
+export enum ChainType {
+  EVM = 'EVM',
+  TON = 'TON',
+}
 
-export const isMainnet = process.env.NEXT_PUBLIC_IS_MAINNET === 'true';
-
-export const RATE_DECIMAL = 6;
-
-export const VNST_DECIMAL = 18;
-
-export const DISABLED_AUTO_CONNECT_KEY = 'disabled_auto_connect';
+export const ChainConfigs = {
+  [Chain.BNB]: {
+    chain: Chain.BNB,
+    chainType: ChainType.EVM,
+    chainName: 'BNB Chain',
+    icon: BNBChainIcon,
+    scanImageUrl: '/assets/images/scans/bsc.png',
+  },
+  [Chain.TON]: {
+    chain: Chain.TON,
+    chainType: ChainType.TON,
+    chainName: 'TON',
+    icon: TONChainIcon,
+    scanImageUrl: '/assets/images/scans/tonviewer.png',
+  },
+};

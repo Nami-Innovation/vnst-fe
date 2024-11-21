@@ -17,16 +17,11 @@ const MerchantPage = ({
   lang: string;
 }) => {
   return (
-    <div className='flex w-full flex-col items-center justify-center overflow-x-hidden lg:px-0'>
+    <div className='flex w-full flex-col items-center justify-center overflow-x-hidden bg-secondary-lightest lg:px-0'>
       <BannerMerchant lang={lang} />
       <div className='flex w-full flex-col items-center justify-center lg:px-0'>
-        <img
-          src='/assets/images/dai-mau.png'
-          className='w-full object-cover'
-          alt='Top'
-        />
-        <div className='w-full bg-grayBackground bg-no-repeat lg:bg-cover lg:bg-top'>
-          <div className=' mx-auto max-w-screen-xl pt-4 lg:pt-0'>
+        <div className='w-full bg-secondary-lightest bg-no-repeat lg:bg-cover lg:bg-top'>
+          <div className='mx-auto max-w-screen-xl pt-4 lg:pt-0'>
             <OurMerchant />
             <MerchantPool
               total_volume={dataAnalytics.notionalValue}
@@ -39,15 +34,10 @@ const MerchantPage = ({
             <TabPool />
           </div>
         </div>
-        <img
-          src='/assets/images/merchant/bg_bottom.png'
-          alt='bottom'
-          className='w-full lg:object-cover'
-        />
       </div>
-      <div className='w-full bg-black'>
+      <div className='mb-20 w-full max-w-screen-xl px-4'>
         <div className='w-full' id='form_submit'>
-          <FormSendMail className='pb-28 pt-32' />
+          <FormSendMail className='' />
         </div>
       </div>
     </div>

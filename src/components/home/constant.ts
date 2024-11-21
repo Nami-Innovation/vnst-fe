@@ -1,4 +1,4 @@
-import { formatNumber } from '@/utils/format';
+import { formatNumber, numberFormater } from '@/utils/format';
 
 type KEY_CONTENT = 'minted' | 'redeem' | 'transaction' | 'holders';
 type KEY_VALUE = {
@@ -46,7 +46,7 @@ export const convertMoney = (
   if (nameMoney === 'VNST') {
     return `~${formatNumber(Number(amount_money) / exchange_rate, 0)} USDT`;
   } else if (nameMoney === 'USDT') {
-    return `~${formatNumber(Number(amount_money) * exchange_rate, 1)} VNST`;
+    return `~${numberFormater(Number(amount_money) * exchange_rate, 1)} VNST`;
   }
 };
 const telegramRegex = /.*\B@(?=\w{5,32}\b)[a-zA-Z0-9]+(?:_[a-zA-Z0-9]+)*.*/;

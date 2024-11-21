@@ -10,4 +10,17 @@ const axios = Axios.create({
   withCredentials: true,
 });
 
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const message = error.response?.data?.message;
+    if (message) {
+      error.message = Array.isArray(message)
+        ? message.join(', ')
+        : error.response.data.message;
+    }
+    return Promise.reject(error);
+  }
+);
+
 export default axios;

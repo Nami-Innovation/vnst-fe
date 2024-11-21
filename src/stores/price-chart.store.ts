@@ -3,6 +3,8 @@ import { produce } from 'immer';
 import { ChartData } from '@/@type/price-chart.type';
 import { getChartData } from '@/services/token-price.api';
 import dayjs, { Dayjs } from 'dayjs';
+import { Chain } from '@/web3/constants';
+import useChainStore from './chain.store';
 
 type Store = {
   loading: boolean;
@@ -13,7 +15,7 @@ type Store = {
   inverted: boolean;
   toggleInverted: (inverted?: boolean) => void;
   setRange: (range: string) => void;
-  fetchData: (token: string, range: string) => Promise<void>;
+  fetchData: (token: string, range: string, chain?: Chain) => Promise<void>;
   setDataPointIndex: (index: number) => void;
 };
 
@@ -32,38 +34,21 @@ const usePriceChartStore = create<Store>()((set) => ({
     );
   },
   setRange: (range) => {
-    set(
-      produce((state) => {
-        state.range = range;
-      })
-    );
+    set({ range });
   },
   setDataPointIndex: (index: number) => {
-    set(
-      produce((state) => {
-        state.dataPointIndex = index;
-      })
-    );
+    set({ dataPointIndex: index });
   },
-  fetchData: async (token: string, range: string) => {
-    set(
-      produce((state) => {
-        state.loading = true;
-      })
-    );
+  fetchData: async (token: string, range: string, chain?: Chain) => {
+    set({ loading: true });
     try {
-      const data = await getChartData(token, range);
-      set(
-        produce((state) => {
-          state.data = data;
-        })
-      );
+      const data = await getChartData(token, range, chain);
+      const currentChain = useChainStore.getState().chain;
+      if (chain === currentChain) {
+        set({ data });
+      }
     } catch (error) {}
-    set(
-      produce((state) => {
-        state.loading = false;
-      })
-    );
+    set({ loading: false });
   },
 }));
 

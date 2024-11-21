@@ -1,47 +1,56 @@
-import React, { PropsWithChildren, useEffect } from 'react';
+import { useIsTablet } from '@/hooks/useMediaQuery';
+import CancelIcons from '../Icons/CancleIcons';
+import {
+  DrawerContext,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerTrigger,
+  DrawerHeader,
+  DialogProps,
+} from './ui';
+import { cn } from '@/utils/helper';
 
-import clsx from 'clsx';
-
-interface IDrawer {
-  isOpen: boolean;
-  className?: string;
-  classParent?: string;
+interface TProps extends DialogProps {
+  trigger: React.ReactNode;
+  children: React.ReactNode;
+  footer?: React.ReactNode;
+  title?: React.ReactNode;
+  closeClassName?: string;
+  contentClassName?: string;
 }
 
-const Drawer: React.FC<PropsWithChildren<IDrawer>> = ({
-  isOpen,
+const Drawer = ({
+  trigger,
   children,
-  className,
-  classParent,
-}) => {
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isOpen]);
-
+  footer,
+  title,
+  contentClassName,
+  ...rest
+}: TProps) => {
+  const isTablet = useIsTablet();
   return (
-    <div
-      className={clsx(
-        'fixed top-0 z-[2] h-full w-full overflow-y-auto bg-black pt-[60px] transition-all duration-300 ease-in-out',
-        {
-          '-right-full opacity-0': !isOpen,
-          'right-0 opacity-100': isOpen,
-        },
-        classParent
-      )}
-    >
-      <div className={clsx('border-t-[2px] border-dark-1', className)}>
+    <DrawerContext {...rest}>
+      <DrawerTrigger asChild={isTablet as boolean}>
+        <div>{trigger}</div>
+      </DrawerTrigger>
+      <DrawerContent
+        className={cn('bg-white px-4 pb-8 pt-6', contentClassName)}
+      >
+        <DrawerClose
+          className={cn(
+            'flex w-full flex-row-reverse text-gray hover:text-primary',
+            !title && 'pb-4 lg:pb-0',
+            rest?.closeClassName
+          )}
+        >
+          <CancelIcons className='h-5 w-5' />
+        </DrawerClose>
+        {!!title ? <DrawerHeader>{title}</DrawerHeader> : null}
         {children}
-      </div>
-    </div>
+        {!!footer ? <DrawerFooter>{footer}</DrawerFooter> : null}
+      </DrawerContent>
+    </DrawerContext>
   );
 };
-
 export default Drawer;

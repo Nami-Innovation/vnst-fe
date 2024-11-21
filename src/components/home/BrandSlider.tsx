@@ -89,15 +89,18 @@ const BrandSlider = () => {
   return (
     <div className='w-full overflow-hidden'>
       <div className='loop-looper-ltr w-max'>
-        <div className='flex items-center gap-x-4 py-[60px] lg:!py-[100px]'>
+        <div className='flex items-center gap-x-5'>
           {ICON_LIST.map((item, index) => (
-            <div key={index}>
+            <div
+              key={index}
+              className='my-5 flex h-[68px] w-[144.4px] items-center justify-center rounded-[12px] border border-gray-200 bg-white shadow-box lg:w-[190px]'
+            >
               <Image
                 src={item.src}
                 alt={item.alt}
                 width={200}
                 height={100}
-                className='h-[80px] w-[160px] object-fill hover:text-white lg:w-[240px]'
+                className='h-[52px] w-[140px] object-fill hover:text-white '
               />
             </div>
           ))}

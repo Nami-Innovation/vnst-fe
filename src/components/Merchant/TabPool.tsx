@@ -11,12 +11,12 @@ const TabPool = () => {
   const [tab, setTab] = useState<TTab>('contribution');
   return (
     <div className='merchant_pool mt-20 w-screen lg:w-full'>
-      <div className='flex w-full items-center justify-start gap-x-8 border-b border-dark-4/30 px-4 font-sf-pro-expanded text-2xl font-bold lg:px-0 lg:text-mb-large'>
+      <div className='flex w-full items-center justify-between gap-x-0 border-b border-gray-200 px-4 font-sf-pro-expanded text-2xl font-bold leading-[30px] lg:justify-start lg:gap-x-10 lg:px-0 lg:text-[30px] lg:leading-9'>
         <button
           className={clsx({
-            'text-gradient-1 border-b-2 border-primary-dark py-2':
+            'border-b-2 border-primary py-2 text-primary':
               tab === 'contribution',
-            'text-dark-5': tab !== 'contribution',
+            'text-gray': tab !== 'contribution',
           })}
           onClick={() => setTab('contribution')}
         >
@@ -24,9 +24,8 @@ const TabPool = () => {
         </button>
         <button
           className={clsx({
-            'text-gradient-1 border-b-2 border-primary-dark py-2':
-              tab === 'liquid',
-            'text-dark-5': tab !== 'liquid',
+            'border-b-2 border-primary py-2 text-primary': tab === 'liquid',
+            'text-gray': tab !== 'liquid',
           })}
           onClick={() => setTab('liquid')}
         >

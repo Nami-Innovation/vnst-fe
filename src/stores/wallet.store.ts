@@ -33,4 +33,6 @@ const useWalletStore = create<Store>()((set) => ({
     ),
 }));
 
+export const useWallet = () => useWalletStore((state) => state.wallet);
+
 export default useWalletStore;

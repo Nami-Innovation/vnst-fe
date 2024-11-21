@@ -3,30 +3,30 @@
 import useLang from '@/hooks/useLang';
 import { useTranslationClient } from '@/i18n/client';
 import Link from 'next/link';
+import Image from 'next/image';
 import Button from '../Button';
-import { ArrowIcon } from '../Icons/ArrowIcon';
-
 const NotFound = () => {
   const lang = useLang();
   const { t } = useTranslationClient('blogs');
   return (
-    <div
-      style={{
-        backgroundImage:
-          lang === 'vi'
-            ? 'url(/assets/images/not_found_vi.jpg)'
-            : 'url(/assets/images/not_found_en.jpg)',
-      }}
-      className='h-[80vh] w-full overflow-x-hidden bg-cover bg-bottom bg-no-repeat'
-    >
-      <div className='flex w-full items-center justify-center pt-[30%]'>
-        <Link href={`/${lang}/blogs`}>
+    <div className='flex h-[80vh] w-screen flex-row items-center justify-center'>
+      <div className='flex w-full flex-col items-center justify-center gap-y-2'>
+        <Image
+          src='/assets/images/not_found.png'
+          width={160}
+          height={160}
+          alt='Not found image'
+        />
+        <p className='font-sf-pro-expanded text-xl font-bold text-primary'>
+          {t('blogs:not_found_page')}
+        </p>
+        <p className='text-base text-gray'>{t('blogs:content_not_found')}</p>
+        <Link href={`/${lang}/blogs`} className='mt-10'>
           <Button
             size='md'
-            variant='primary'
-            className='flex-rows flex items-center justify-center gap-x-2 text-white'
+            variant='secondary'
+            className='flex-rows flex items-center justify-center gap-x-2 text-base text-primary-dark'
           >
-            <ArrowIcon.left />
             <p> {t('blogs:back_to_page')}</p>
           </Button>
         </Link>

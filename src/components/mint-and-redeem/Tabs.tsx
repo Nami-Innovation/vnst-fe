@@ -1,6 +1,6 @@
-import clsx from 'clsx';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FunctionName } from './types';
+import colors from '@/colors';
 
 type Props = {
   active: FunctionName;
@@ -11,80 +11,81 @@ const Tabs = ({ active, onChange }: Props) => {
   return (
     <div className='grid grid-cols-2'>
       <button
-        className='relative h-10 outline-none'
-        onClick={() => onChange('mint')}
+        className='relative col-span-1 h-10 w-full outline-none lg:w-[190px]'
+        onClick={() => {
+          onChange('mint');
+        }}
       >
         <svg
-          viewBox='0 0 187 40'
+          xmlns='http://www.w3.org/2000/svg'
+          width='190'
+          height='40'
+          viewBox='0 0 190 40'
           fill='none'
-          preserveAspectRatio='none'
           className='h-full w-full'
         >
-          <path
-            d='M0 5C0 2.23858 2.23858 0 5 0H166.91C168.804 0 170.535 1.07001 171.382 2.76393L186.382 32.7639C188.044 36.0884 185.627 40 181.91 40H5C2.23858 40 0 37.7614 0 35V5Z'
-            fill={active === 'mint' ? 'url(#mint-linear)' : 'black'}
-            stroke={active === 'mint' ? 'none' : 'url(#burn-linear)'}
-          />
-          <defs>
-            <linearGradient
-              id='mint-linear'
-              x1='0'
-              y1='0'
-              x2='179.062'
-              y2='0'
-              gradientUnits='userSpaceOnUse'
+          <g id='Mint'>
+            <path
+              id='Frame'
+              d='M0.5 6C0.5 2.96243 2.96243 0.5 6 0.5H166.292C168.375 0.5 170.279 1.67701 171.211 3.54032L185.211 31.5403C187.04 35.1973 184.38 39.5 180.292 39.5H6C2.96244 39.5 0.5 37.0376 0.5 34V6Z'
+              fill={active === 'mint' ? colors.primary.DEFAULT : 'white'}
+              stroke={colors.primary.DEFAULT}
+            />
+            <text
+              id='Mint_2'
+              fill={active === 'mint' ? 'white' : '#006666'}
+              xmlSpace='preserve'
+              style={{ whiteSpace: 'pre' }}
+              fontFamily='SF Pro'
+              fontSize='16'
+              letterSpacing='0em'
+              className='font-sf-pro text-sm font-semibold leading-[18px] lg:text-base lg:leading-5'
             >
-              <stop stopColor='#006666' />
-              <stop offset='1' stopColor='#00C096' />
-            </linearGradient>
-          </defs>
+              <tspan x='74.1172' y='26.6875'>
+                Mint
+              </tspan>
+            </text>
+          </g>
         </svg>
-        <div
-          className={clsx(
-            'absolute top-0 w-full text-center font-semibold leading-10',
-            active === 'mint' ? 'text-white' : 'text-dark-3'
-          )}
-        >
-          Mint
-        </div>
       </button>
       <button
-        className='relative h-10 outline-none'
-        onClick={() => onChange('redeem')}
+        className='relative col-span-1 h-10 w-full outline-none lg:w-[190px]'
+        onClick={() => {
+          onChange('redeem');
+        }}
       >
         <svg
-          viewBox='0 0 188 40'
-          preserveAspectRatio='none'
-          className='h-full w-full'
+          xmlns='http://www.w3.org/2000/svg'
+          width='190'
+          height='40'
+          viewBox='0 0 190 40'
           fill='none'
+          className='h-full w-full'
         >
-          <path
-            d='M187.5 35C187.5 37.4853 185.485 39.5 183 39.5H20.6131C18.8919 39.5 17.3215 38.5182 16.5676 36.9709L1.95224 6.97086C0.496002 3.98174 2.67271 0.5 5.9977 0.5H183C185.485 0.5 187.5 2.51472 187.5 5V35Z'
-            fill={active === 'redeem' ? 'url(#burn-linear)' : 'black'}
-            stroke={active === 'redeem' ? 'none' : 'url(#mint-linear)'}
-          />
-          <defs>
-            <linearGradient
-              id='burn-linear'
-              x1='188'
-              y1='40'
-              x2='-2.0661'
-              y2='40'
-              gradientUnits='userSpaceOnUse'
+          <g id='Redeem'>
+            <path
+              id='Frame'
+              d='M189.5 34C189.5 37.0376 187.038 39.5 184 39.5H23.2383C21.1346 39.5 19.2152 38.3 18.2938 36.4088L4.65279 8.40883C2.87294 4.75546 5.53337 0.5 9.59723 0.5H184C187.038 0.5 189.5 2.96243 189.5 6V34Z'
+              fill={active === 'redeem' ? colors.primary.DEFAULT : 'white'}
+              stroke={colors.primary.DEFAULT}
+            />
+            <text
+              id='Redeem_2'
+              fill={active === 'redeem' ? 'white' : '#006666'}
+              xmlSpace='preserve'
+              style={{ whiteSpace: 'pre' }}
+              fontFamily='SF Pro'
+              fontSize='16'
+              letterSpacing='0em'
+              fontWeight={590}
+              className='font-sf-pro text-sm font-semibold leading-[18px] lg:text-base lg:leading-5'
             >
-              <stop stopColor='#006666' />
-              <stop offset='1' stopColor='#00C096' />
-            </linearGradient>
-          </defs>
+              <tspan x='71.1641' y='25.6875'>
+                Redeem
+              </tspan>
+            </text>
+          </g>
         </svg>
-        <div
-          className={clsx(
-            'absolute top-0 w-full text-center font-semibold leading-10',
-            active === 'redeem' ? 'text-white' : 'text-dark-3'
-          )}
-        >
-          Redeem
-        </div>
       </button>
     </div>
   );

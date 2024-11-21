@@ -1,9 +1,13 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Modal from '../common/Modal';
 import { useConnect, useAccount } from 'wagmi';
-import Wallets, { WalletConfig, WalletIds, WalletLogos } from '@/web3/wallets';
+import Wallets, {
+  WalletConfig,
+  WalletIds,
+  WalletLogos,
+} from '@/web3/evm/wallets';
 import useAppStore from '@/stores/app.store';
 import { signMessage, switchNetwork } from '@wagmi/core';
 import { UserRejectedRequestError, hashMessage } from 'viem';
@@ -13,13 +17,15 @@ import LeftPanel from './LeftPanel';
 import Button from '../common/Button';
 import { useTranslationClient } from '@/i18n/client';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { mainChain } from '@/web3/wagmiConfig';
+import { mainChain } from '@/web3/evm/wagmiConfig';
 import { toast } from 'react-toastify';
-import { enableAutoConnect } from '@/web3/utils';
+import { enableAutoConnect } from '@/web3/evm/utils';
 import useDisconnectWallet from '@/hooks/useDisconnectWallet';
 import { LANGUAGE, LINK_DIRECT } from '../common/utils/header';
 import useLang from '@/hooks/useLang';
 import nl2br from 'react-nl2br';
+import Drawer from '../common/Modal/Drawer';
+import { useIsTablet } from '@/hooks/useMediaQuery';
 
 const autoConnectWalletIdKey = 'wallet_id';
 
@@ -27,6 +33,7 @@ const ConnectWalletModal = () => {
   const searchParams = useSearchParams();
   const lang = useLang();
   const autoConnectWalletId = searchParams.get(autoConnectWalletIdKey);
+  const isTablet = useIsTablet();
   const { t } = useTranslationClient('common');
   const [active, setActive] = useState<WalletConfig>(() => {
     let wallet: WalletConfig | undefined;
@@ -48,7 +55,7 @@ const ConnectWalletModal = () => {
   ]);
   const { connectAsync } = useConnect();
   const { isConnected } = useAccount();
-  const { disconnect } = useDisconnectWallet();
+  const disconnect = useDisconnectWallet();
   const closeModal = () => toggleConnectWalletModal(false);
 
   const onConnect = async (wallet: WalletConfig, isMobile = false) => {
@@ -127,17 +134,8 @@ const ConnectWalletModal = () => {
       onConnect(wallet);
     }
   }, []);
-
-  return (
-    <Modal
-      isOpen={isOpenConnectWallet}
-      shouldCloseOnOverlayClick={true}
-      isMobileFullHeight
-      onRequestClose={closeModal}
-      className='max-w-2xl'
-      overlayClassName='z-0 lg:z-10'
-      title={t('connect_wallet')}
-    >
+  const content = useMemo(() => {
+    return (
       <div className='grid grid-cols-12 gap-x-5'>
         <LeftPanel
           setActive={setActive}
@@ -154,15 +152,15 @@ const ConnectWalletModal = () => {
           {t('connect_wallet')}
         </Button>
 
-        <div className='col-span-7 hidden flex-col items-center justify-center rounded-md bg-black p-4 md:flex'>
+        <div className='col-span-7 hidden flex-col items-center justify-center rounded-md bg-gray-300 p-4 md:flex'>
           {active.connector.ready ? (
             <>
               <img
                 src={WalletLogos[active.connector.name]}
                 alt={active.connector.name}
-                className='h-12 w-12'
+                className='h-[51px] w-[51px] p-[8.5]'
               />
-              <div className='mt-1.5 font-semibold'>
+              <div className='text-base font-semibold leading-5 text-black'>
                 {active.connector.name}
               </div>
 
@@ -170,15 +168,17 @@ const ConnectWalletModal = () => {
                 onClick={() => onConnect(active, false)}
                 size='md'
                 variant='primary'
-                className='my-4'
+                className='my-4 lg:w-40'
               >
                 {t('connect_wallet')}
               </Button>
-              <div className='text-xs'>{t('common:dont_wallet_extension')}</div>
+              <div className='text-xs font-semibold leading-4 text-gray'>
+                {t('common:dont_wallet_extension')}
+              </div>
               <a
                 target='_blank'
                 href={LINK_DIRECT[lang as keyof LANGUAGE]?.learn_add_wallet}
-                className='mt-1 text-xs text-primary'
+                className='mt-1 text-xs font-semibold leading-4 text-primary'
               >
                 {t('common:learn_add_wallet')}
               </a>
@@ -188,14 +188,14 @@ const ConnectWalletModal = () => {
               <img
                 src={WalletLogos[active.connector.name]}
                 alt={active.connector.name}
-                className='h-12 w-12'
+                className='h-[51px] w-[51px] p-[8.5]'
               />
-              <div className='mt-1.5 font-semibold'>
+              <div className='font-semibold text-black'>
                 {t('common:install_wallet', {
                   wallet: active.connector.name,
                 })}
               </div>
-              <div className='mt-4 text-center text-xs text-dark-3'>
+              <div className='mt-2 text-center text-xs font-semibold leading-4 text-gray'>
                 {nl2br(
                   t('common:add_extension_content', {
                     wallet: active.connector.name,
@@ -206,14 +206,14 @@ const ConnectWalletModal = () => {
                 onClick={() => window.open(active.installHref)}
                 size='md'
                 variant='primary'
-                className='my-4'
+                className='my-4 w-20'
               >
                 {t('common:btn:install')}
               </Button>
               <a
                 target='_blank'
                 href={LINK_DIRECT[lang as keyof LANGUAGE]?.learn_add_wallet}
-                className='mt-1 text-xs text-primary'
+                className='text-xs font-semibold leading-4 text-primary'
               >
                 {t('common:how_to_install', { wallet: active.connector.name })}
               </a>
@@ -221,6 +221,35 @@ const ConnectWalletModal = () => {
           )}
         </div>
       </div>
+    );
+  }, [lang, active, t]);
+  if (isTablet) {
+    return (
+      <Drawer
+        title={
+          <div className='font-sf-pro-expanded text-lg font-bold leading-[22px] text-black'>
+            {t('connect_wallet')}
+          </div>
+        }
+        trigger={<div className='hidden'></div>}
+        open={isOpenConnectWallet}
+        onOpenChange={(open) => toggleConnectWalletModal(open)}
+      >
+        {content}
+      </Drawer>
+    );
+  }
+  return (
+    <Modal
+      isOpen={isOpenConnectWallet}
+      shouldCloseOnOverlayClick={true}
+      isMobileFullHeight
+      onRequestClose={closeModal}
+      className='max-w-2xl !bg-white'
+      overlayClassName='z-0 lg:z-10'
+      title={t('connect_wallet')}
+    >
+      {content}
     </Modal>
   );
 };

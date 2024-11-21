@@ -33,11 +33,11 @@ export const Nami = {
     'https://play.google.com/store/apps/details?id=com.namicorp.exchange&hl=en&gl=US',
 };
 
-export const Oxalus = {
-  address: '0xb3F73e6dF1D13cE7E7f834e73631a6FCC380764B',
-  link: 'https://oxalus.io/',
-  integrationDate: '11/09/2023',
-  linkIOS: 'https://apps.apple.com/vn/app/oxalus-nft-wallet/id1620111723',
+export const Fizen = {
+  address: '0x72d5c14b14590940cde91350f2e196de04217794',
+  link: 'https://fizen.io/',
+  integrationDate: '29/01/2024',
+  linkIOS: 'https://apps.apple.com/us/app/fizen-super-app/id1621269508',
   linkAndroid:
-    'https://play.google.com/store/apps/details?id=io.oxalus.wallet&hl=en&gl=US',
+    'https://play.google.com/store/apps/details?id=com.fizen.io.wallet&pli=1',
 };

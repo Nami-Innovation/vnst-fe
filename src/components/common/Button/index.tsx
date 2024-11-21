@@ -1,14 +1,13 @@
 import { ForwardedRef, ReactNode, forwardRef } from 'react';
-import clsx from 'clsx';
+import { cn } from '@/utils/helper';
 
 interface ButtonI extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   prevIcon?: ReactNode;
   nextIcon?: ReactNode;
   size: 'xs' | 'sm' | 'md' | 'lg';
-  variant?: 'primary' | 'secondary' | 'tertiary';
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'chip';
   outline?: boolean;
 }
-
 const Button = forwardRef(
   (
     {
@@ -27,22 +26,27 @@ const Button = forwardRef(
   ) => {
     return (
       <button
-        className={clsx(
-          className,
-          'flex items-center justify-center px-4 leading-6 outline-none disabled:cursor-not-allowed',
+        className={cn(
+          'flex items-center justify-center px-4 font-semibold text-white outline-none disabled:cursor-not-allowed',
           {
-            'h-6 rounded-[5px] !px-3 text-xs': size === 'xs',
-            'h-8 rounded text-xs': size === 'sm',
-            'h-10 rounded-md text-base': size === 'md',
-            'h-12 rounded-lg text-base': size === 'lg',
-            'bg-gradient-to-r from-primary-dark via-primary to-primary-dark bg-[length:200%] bg-left transition-[background-position] duration-300 hover:bg-right hover:shadow-[0_0_26px_0_rgba(0,192,150,0.6)]':
+            'h-6 rounded-[4px] !px-3 text-xs leading-4': size === 'xs',
+            'h-8 rounded-[6px] text-xs leading-4': size === 'sm',
+            'h-10 rounded text-base leading-5': size === 'md',
+            'h-12 rounded-md text-base leading-5': size === 'lg',
+            'bg-primary bg-[length:200%] bg-left hover:bg-primary-dark':
               variant === 'primary' && !disabled,
-            'border border-dark-2 bg-dark-1 text-dark-3':
+            'border border-primary bg-white text-primary-dark hover:bg-primary hover:text-white':
               variant === 'secondary' && !disabled,
-            'bg-primary-dark bg-opacity-40 text-primary-dark': disabled,
+            'bg-primary bg-opacity-[0.24] text-white':
+              variant === 'primary' && disabled,
+            'border border-primary bg-white bg-opacity-[0.24] text-primary-dark':
+              variant === 'secondary' && disabled,
             'pr-2': !!nextIcon,
             'pl-2': !!prevIcon,
-          }
+            'border border-gray-200 bg-white text-gray hover:bg-primary hover:text-white':
+              variant === 'chip',
+          },
+          className
         )}
         type={type}
         disabled={disabled}

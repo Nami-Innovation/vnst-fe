@@ -1,6 +1,5 @@
 import React from 'react';
 import ChevronLeftTriangle from '../common/Icons/ChevronLeftTriangle';
-import ChevronRightTriangle from '../common/Icons/ChevronRightTriangle';
 import dayjs from '@/lib/dayjs';
 
 type TProps = {
@@ -19,20 +18,20 @@ function DateRangeComponent({
   const isDisabled = dayjs(endDate).isToday();
 
   return (
-    <div className='flex w-max items-center justify-center gap-x-2  rounded-[8px] border-0 bg-white px-2 py-2'>
-      <button onClick={handleDecreaseClick} className='text-dark-3'>
-        <ChevronLeftTriangle />
+    <div className='flex w-max items-center justify-center gap-x-2  rounded-[6px] border border-gray-200 bg-white px-2 py-2'>
+      <button onClick={handleDecreaseClick} className='text-gray w-3 h-3'>
+        <ChevronLeftTriangle className='h-full w-full' />
       </button>
-      <div className='text-xs text-dark-4'>
+      <div className='text-xs font-semibold leading-4 text-gray'>
         {dayjs(startDate).format('DD/MM/YYYY')} -{' '}
         {dayjs(endDate).format('DD/MM/YYYY')}
       </div>
       <button
         onClick={handleIncreaseClick}
         disabled={isDisabled}
-        className='text-dark-3 disabled:cursor-not-allowed disabled:text-grayBackground/40'
+        className='text-gray w-3 h-3 disabled:cursor-not-allowed disabled:text-grayBackground/40'
       >
-        <ChevronRightTriangle fill={isDisabled ? 'gray' : 'currentColor'} />
+        <ChevronLeftTriangle fill={isDisabled ? 'gray' : 'currentColor'} className='h-full w-full rotate-180' />
       </button>
     </div>
   );

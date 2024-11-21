@@ -12,11 +12,21 @@ import { getEventLogs } from '@/services/event-log.api';
 import { EventLog, EventName } from '@/@type/event-log.type';
 import { useAccount } from 'wagmi';
 import useAppStore from '@/stores/app.store';
+import Image from 'next/image';
 
-export const Message = ({ children }: { children: React.ReactNode }) => {
+export const Message = ({
+  children,
+  colSpan = 5,
+}: {
+  children: React.ReactNode;
+  colSpan?: number;
+}) => {
   return (
     <tr>
-      <td colSpan={5} className='text-start'>
+      <td
+        colSpan={colSpan}
+        className='!px-3 !py-4 text-start lg:!px-4 lg:!py-5'
+      >
         {children}
       </td>
     </tr>
@@ -90,26 +100,29 @@ const TransactionTable = () => {
     if (item.event === EventName.MINT) {
       return (
         <tr key={item._id}>
-          <td>{t(`mint_redeem:mint.title`)}</td>
+          <td className='text-black'>{t(`mint_redeem:mint.title`)}</td>
           <td className='text-primary'>
             + {formatGweiNumberStr(item.returnValues[2])}
           </td>
 
-          <td className='text-danger'>
+          <td className=' text-negative'>
             - {formatGweiNumberStr(item.returnValues[1])}
           </td>
-
           <td>
             <a
               href={getBscScanLink(item.transactionHash)}
               target='_blank'
-              className='group flex items-center hover:text-primary hover:underline'
+              className='flex items-center gap-x-2 hover:text-primary hover:underline lg:gap-x-0'
             >
-              {dayjs
-                .unix(Number(item.returnValues.created_at))
-                .format('HH:mm:ss - DD/MM/YYYY')}
+              <p className='flex-1'>
+                {dayjs
+                  .unix(Number(item.returnValues.created_at))
+                  .format('HH:mm:ss - DD/MM/YYYY')}
+              </p>
 
-              <ExternalLink className='ml-2 h-3 w-3' />
+              <p className='!h-5 !w-5 flex-1 lg:flex-initial'>
+                <ExternalLink className='h-5 w-5' />
+              </p>
             </a>
           </td>
         </tr>
@@ -117,8 +130,8 @@ const TransactionTable = () => {
     } else {
       return (
         <tr key={item._id}>
-          <td>{t(`mint_redeem:redeem.title`)}</td>
-          <td className='text-danger'>
+          <td className='text-black'>{t(`mint_redeem:redeem.title`)}</td>
+          <td className='text-error-100'>
             - {formatGweiNumberStr(item.returnValues[1])}
           </td>
 
@@ -130,13 +143,17 @@ const TransactionTable = () => {
             <a
               href={getBscScanLink(item.transactionHash)}
               target='_blank'
-              className='group flex items-center hover:text-primary hover:underline'
+              className='flex items-center gap-x-2 hover:text-primary hover:underline lg:gap-x-0'
             >
-              {dayjs
-                .unix(Number(item.returnValues.created_at))
-                .format('HH:mm:ss - DD/MM/YYYY')}
+              <p className='flex-1'>
+                {dayjs
+                  .unix(Number(item.returnValues.created_at))
+                  .format('HH:mm:ss - DD/MM/YYYY')}
+              </p>
 
-              <ExternalLink className='ml-2 h-3 w-3' />
+              <p className='!h-5 !w-5 flex-1 lg:flex-initial'>
+                <ExternalLink className='h-5 w-5' />
+              </p>
             </a>
           </td>
         </tr>
@@ -145,34 +162,35 @@ const TransactionTable = () => {
   };
 
   const renderBody = () => {
-    if (!isConnected) {
+    if (transactions.length === 0) {
       return (
         <Message>
-          <span
-            className='cursor-pointer text-primary'
-            onClick={() => toggleConnectWalletModal(true)}
-          >
-            {t('common:connect_wallet')}
-          </span>{' '}
-          {t('mint_redeem:history_table.connect_wallet_for')}
+          <div className='flex w-full flex-col items-center justify-center'>
+            <div className='font-semibold text-gray'>
+              {t('mint_redeem:history_table.empty')}
+            </div>
+            <Image
+              src='/assets/images/no_data.png'
+              width={120}
+              height={120}
+              alt='Not data'
+              className=''
+            />
+          </div>
         </Message>
       );
-    }
-
-    if (transactions.length === 0) {
-      return <Message>{t('mint_redeem:history_table.empty')}</Message>;
     }
 
     return transactions.map(renderRow);
   };
 
   return (
-    <div className='mt-10 lg:mt-8'>
-      <div className='mb-5 flex justify-between'>
-        <h3 className='font-sf-pro-expanded text-xl font-bold text-dark-3'>
+    <div className='mt-10 lg:mt-[30px] '>
+      <div className='mb-4 flex flex-col justify-between gap-y-4 lg:flex-row'>
+        <h3 className='font-sf-pro-expanded text-xl font-bold leading-6 text-black lg:text-3xl lg:leading-9'>
           {t('mint_redeem:history')}
         </h3>
-        <div className='flex gap-x-4'>
+        <div className='flex gap-x-2'>
           {Filters.map((f) => (
             <Button
               onClick={() => {
@@ -181,36 +199,62 @@ const TransactionTable = () => {
               }}
               key={f.title}
               size='sm'
-              variant={filter === f.type ? 'primary' : 'secondary'}
+              variant={filter === f.type ? 'primary' : 'chip'}
+              className='text-xs font-semibold leading-4'
             >
               {f.title}
             </Button>
           ))}
         </div>
       </div>
-      <div className='overflow-x-auto overflow-y-hidden rounded-xxl'>
-        <table className='min-w-[520px]'>
-          <thead>
-            <tr>
-              <th style={{ width: '20%' }}>
-                {t('mint_redeem:history_table.transaction')}
-              </th>
-              <th style={{ width: '30%' }}>VNST</th>
-              <th style={{ width: '20%' }}>USDT</th>
-              <th style={{ width: '30%' }}>
-                {t('mint_redeem:history_table.time')}
-              </th>
-            </tr>
-          </thead>
-          <tbody>{renderBody()}</tbody>
-        </table>
-      </div>
+      {isConnected ? (
+        <div className='overflow-x-auto overflow-y-hidden rounded-xxl !bg-white shadow-box'>
+          <table className='min-w-[520px] border border-gray-200'>
+            <thead>
+              <tr className='text-sm leading-[18px] lg:text-base lg:leading-5'>
+                <th style={{ width: '20%' }}>
+                  {t('mint_redeem:history_table.transaction')}
+                </th>
+                <th style={{ width: '30%' }}>VNST</th>
+                <th style={{ width: '20%' }}>USDT</th>
+                <th style={{ width: '30%' }}>
+                  {t('mint_redeem:history_table.time')}
+                </th>
+              </tr>
+            </thead>
+            <tbody>{renderBody()}</tbody>
+          </table>
+        </div>
+      ) : (
+        <div className='flex w-full flex-col items-center justify-center'>
+          <Image
+            src='/assets/images/not_connect_wallet.png'
+            width={120}
+            height={120}
+            alt='Not connect wallet'
+            className=''
+          />
+          <div className='text-xs  font-semibold leading-4'>
+            <button
+              className='inline cursor-pointer text-primary hover:underline'
+              onClick={() => toggleConnectWalletModal(true)}
+            >
+              {t('common:connect_wallet')}
+            </button>{' '}
+            <span className='text-gray'>
+              {t('mint_redeem:history_table.connect_wallet_for')}
+            </span>
+          </div>
+        </div>
+      )}
+
       <div className='mt-5 flex justify-center'>
         <Pagination
           total={total}
           currentPage={page}
           onChangePage={setPage}
           size={limit}
+          hasArrowBtn={true}
         />
       </div>
     </div>

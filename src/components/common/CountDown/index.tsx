@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-// Five minutes 
-const TimeCountDown = 300
+// Five minutes
+const TimeCountDown = 300;
 const Countdown = ({
   className,
   onResend,
@@ -23,7 +23,7 @@ const Countdown = ({
     <div className={className}>
       {timeLeft <= 0 ? (
         <button
-          className='underline-offset-1 hover:underline'
+          className='underline underline-offset-1 hover:underline'
           onClick={() => {
             onResend();
             setTimeLeft(TimeCountDown);

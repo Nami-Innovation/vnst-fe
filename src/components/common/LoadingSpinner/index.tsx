@@ -34,7 +34,7 @@ const LoadingSpinner = ({
         height='15'
         rx='2.00238'
         transform='rotate(-45 51.1777 54.0342)'
-        className='fill-dark-3'
+        className='fill-gray-200'
       />
       <g opacity='0.4' filter='url(#filter1_d_2882_3352)'>
         <rect
@@ -88,7 +88,7 @@ const LoadingSpinner = ({
         height='15'
         rx='2'
         transform='rotate(180 44 72)'
-        className='fill-dark-3'
+        className='fill-gray-200'
       />
       <g opacity='0.8' filter='url(#filter5_d_2882_3352)'>
         <rect

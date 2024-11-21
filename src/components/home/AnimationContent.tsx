@@ -24,7 +24,7 @@ const AnimationContent = () => {
   }, [currentIndex, setCurrentString]);
 
   return (
-    <div className='whitespace-wrap min-h-[80px] px-4 text-center font-sf-pro-expanded text-white md:px-10 lg:px-0 lg:text-start'>
+    <div className='whitespace-wrap min-h-[80px] pl-4 text-start font-sf-pro-expanded font-bold text-secondary-darkest md:px-10 lg:px-0'>
       <Fader text={t(currentString)} />
     </div>
   );

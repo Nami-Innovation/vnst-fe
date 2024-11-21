@@ -17,45 +17,20 @@ const Banner = async ({
   const { t } = await useTranslation(lang, 'homepage');
 
   return (
-    <div className='relative h-max w-full overflow-x-hidden border-0 bg-black bg-cover bg-no-repeat'>
-      <div
-        style={{ aspectRatio: 1200 / 884 }}
-        className='relative mx-auto hidden max-w-screen-xl lg:block'
-      >
-        <Image
-          src='/assets/images/background_banner.jpeg'
-          width={3282}
-          height={1470}
-          quality={80}
-          alt='Banner VNST'
-          className='absolute h-full w-auto max-w-none'
-          style={{ right: '-54%', top: '-8%' }}
-        />
-      </div>
-      <Image
-        width={2280}
-        height={360}
-        quality={100}
-        src='/assets/images/dai-mau.png'
-        alt=''
-        style={{ maxHeight: 180 }}
-        className='absolute bottom-0 hidden h-auto w-full lg:block'
-      />
-
-      <div className='w-full lg:absolute lg:top-[20%]'>
-        <div className='mx-auto max-w-screen-xl gap-x-4 lg:grid lg:grid-cols-3 lg:gap-y-20 xl:px-0 '>
-          <div className=' col-span-2   mb-0 mt-6 text-center font-bold md:px-4 lg:my-auto lg:mt-0 lg:h-full lg:text-start xl:px-0'>
-            <div className='hidden text-mb-large leading-8 lg:block lg:text-large lg:leading-[60px]'>
-              <span className='text-gradient font-sf-pro-expanded font-bold'>
-                {t('title_banner')}
-              </span>
-            </div>
-            <div className='content-animation mt-5 text-mb-large leading-8 lg:mt-0 lg:text-large lg:leading-[60px]'>
+    <div className='bg-fit relative h-[790px] w-full max-w-screen-2xl overflow-hidden border-0 bg-secondary-lightest lg:h-[744px] lg:py-[70px]'>
+      <div className='h-full w-full bg-[url(/assets/images/bg_bannerMB.png)] bg-[length:100%_384px] bg-[right_top_35%] bg-no-repeat lg:bg-[url(/assets/images/background_banner.png)] lg:bg-[length:1440px_535px] lg:bg-center'>
+        <div className='mx-auto max-w-screen-xl gap-x-4 lg:gap-y-20 xl:px-0  '>
+          <div className='mb-0 mt-6 w-full text-center font-semibold lg:my-auto lg:mt-0 lg:h-full lg:w-[70%] lg:text-start xl:px-0'>
+            <div className='content-animation mt-12 h-[68px] space-y-3 text-[32px] leading-8 lg:mt-0 lg:h-[160px] lg:text-[70px] lg:leading-[70px] '>
               <AnimationContent />
             </div>
-            <div className='z-10 mt-4 flex flex-col items-center leading-[60px] lg:mt-6 lg:items-start'>
+            <div className='mt-8 flex flex-col px-4 leading-[60px] lg:mt-7 lg:items-start lg:px-0'>
               <a href={`/${lang}/mint-and-redeem`}>
-                <Button size='md' variant='primary' className='!normal-case'>
+                <Button
+                  size='md'
+                  variant='primary'
+                  className='!px-5 !py-2.5 font-semibold !normal-case leading-5'
+                >
                   {t('banner_button_content')}
                 </Button>
               </a>
@@ -63,11 +38,8 @@ const Banner = async ({
           </div>
         </div>
       </div>
-      <div
-        className='w-full md:px-4 lg:absolute lg:bottom-[25%] xl:px-0'
-        id='banner_mobile'
-      >
-        <div className='lg:flex-rows mx-auto flex h-full w-full max-w-screen-xl flex-col items-end justify-end px-4 pb-24 lg:mb-0 lg:items-center lg:justify-center lg:bg-black lg:px-0 lg:pb-0'>
+      <div className='absolute bottom-2 w-full md:px-4 lg:bottom-4 xl:px-0'>
+        <div className='lg:flex-rows mx-auto flex h-full w-full max-w-screen-xl flex-col items-end justify-end px-4 lg:mb-0 lg:h-[120px] lg:items-center lg:justify-center lg:px-0 lg:pb-0'>
           <BannerContent dataStats={dataStats} lang={lang} />
         </div>
       </div>

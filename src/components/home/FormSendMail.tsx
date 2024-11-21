@@ -5,12 +5,13 @@ import { Controller, useForm } from 'react-hook-form';
 import Input from '../common/Input';
 import { useTranslationClient } from '@/i18n/client';
 import Button from '../common/Button';
-import Image from 'next/image';
 import clsx from 'clsx';
 import { isTelegram, isEmail } from './constant';
 import ModalStatus from '../common/Modal/ModalStatus';
 import nl2br from 'react-nl2br';
 import { TParams, subcriberMerchant } from '@/services/subcriber.api';
+import { useIsMobile } from '@/hooks/useMediaQuery';
+import { useParams } from 'next/navigation';
 
 type FormValues = {
   name: string;
@@ -27,6 +28,7 @@ type TProps = {
 
 const FormSendMail = ({ className }: TProps) => {
   const { t } = useTranslationClient('homepage');
+  const { lang } = useParams();
   const {
     handleSubmit,
     control,
@@ -40,6 +42,7 @@ const FormSendMail = ({ className }: TProps) => {
     reValidateMode: 'onSubmit',
   });
   const [openModal, setOpenModal] = useState(false);
+  const isMobile = useIsMobile();
   const handleValidate = (name: string, email: string) => {
     if (!name) {
       setError('name', { type: 'onSubmit', message: t('homepage:error:name') });
@@ -102,125 +105,113 @@ const FormSendMail = ({ className }: TProps) => {
   const onSubmit = async (data: FormValues) => {
     await handleSendMail(data);
   };
+
   return (
     <div
       className={clsx(
-        'mx-auto h-max w-full px-4 xl:max-w-screen-xl xl:px-0',
+        'h-[636px] w-full rounded-xxl bg-[url(/assets/images/bg_formMB.png)] bg-cover bg-center bg-no-repeat lg:h-max lg:bg-[url(/assets/images/bg-form.png)]',
         className
       )}
       id='form-mail'
     >
-      <div className='relative w-full pb-4 text-start font-semibold lg:px-[30px] lg:pb-10'>
-        <div className='mb-2 w-full lg:mb-6'>
-          <p className='leading-mb-large lg:leading-large font-sf-pro-expanded text-mb-large font-bold capitalize text-white lg:text-large'>
+      <div className='flex w-full flex-col gap-y-2 p-6 lg:gap-y-6 lg:px-10 lg:py-[30px]'>
+        <div className='font-semibold'>
+          <div className='font-sf-pro-expanded text-mb-large font-bold leading-9 text-primary lg:text-[50px] lg:leading-[54px]'>
             {t('form_title')}
-          </p>
-          <div className=' leading-mb-large w-full break-keep font-sf-pro-expanded text-mb-large font-bold capitalize lg:whitespace-nowrap lg:text-large lg:leading-[58px]'>
-            <span className='text-gradient'> {t('form_title_1')}</span>
+
+            <p
+              className='block text-white'
+              dangerouslySetInnerHTML={{
+                __html: t('form_title_1'),
+              }}
+            ></p>
           </div>
         </div>
-        <div className='text-sm lg:text-base'>
+        <div className='text-sm font-semibold leading-[18px] lg:text-base lg:leading-5'>
           <p dangerouslySetInnerHTML={{ __html: t('form_sub_title') }}></p>
           <p
             dangerouslySetInnerHTML={{ __html: t('form_sub_title_1') }}
             className='text-primary'
           ></p>
         </div>
-        <div
-          className='absolute bottom-0 h-48 w-48 translate-y-1/2 rounded-full bg-primary'
-          style={{ filter: 'blur(150px)' }}
-        />
-      </div>
-      <div
-        id='form-submit'
-        className='relative grid w-full grid-cols-1 gap-x-8 rounded-xl border border-primary-dark bg-cover bg-no-repeat lg:grid-cols-2 lg:rounded-xxl lg:border-0'
-      >
-        <form
-          className={clsx(
-            'relative flex w-full flex-col items-end justify-center px-4 pb-0 pt-5 md:pt-[30px] lg:items-start lg:gap-x-10 lg:px-[30px] lg:pb-[30px]',
-            !isValid ? 'gap-y-3' : 'gap-y-4 md:gap-y-5'
-          )}
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <div className='flex w-full flex-col'>
-            <Controller
-              control={control}
-              name='name'
-              render={({ field: { value, onChange } }) => (
-                <Input
-                  placeholder={t('homepage:placeholder:name')}
-                  value={value}
-                  onChange={onChange}
-                  classNameInput='border-0 px-4 rounded-md w-full bg-black placeholder:text-dark-3 outline-none h-10 placeholder:text-xs md:placeholder:text-base'
-                />
-              )}
-            />
-            {errors.name ? (
-              <p className='mt-1 pl-2 text-xs text-error-200'>
-                {errors.name.message}
-              </p>
-            ) : null}
-          </div>
-          <div className='flex w-full flex-col'>
-            <Controller
-              control={control}
-              name='email'
-              render={({ field: { onChange, value } }) => (
-                <Input
-                  classNameInput='border-0 px-4 rounded-md w-full bg-black placeholder:text-dark-3 outline-none h-10 placeholder:text-xs md:placeholder:text-base'
-                  placeholder={t('homepage:placeholder:mail')}
-                  value={value}
-                  onChange={onChange}
-                />
-              )}
-            />
-            {errors.email ? (
-              <p className='mt-1 pl-2 text-xs text-error-200'>
-                {errors.email.message}
-              </p>
-            ) : null}
-          </div>
-          <div className='flex w-full items-end justify-end xl:w-auto'>
-            <Button
-              type='submit'
-              size={'md'}
-              className='w-max rounded-md capitalize xl:w-auto'
-            >
-              {t('homepage:send_mail')}
-            </Button>
-          </div>
-        </form>
-        <div className='relative hidden lg:block'>
-          <Image
-            src='/assets/images/vnst-icon.png'
-            width={584}
-            height={564}
-            quality={80}
-            alt='VNST'
-            className='relative bottom-0 right-0 w-full object-cover lg:absolute'
-          />
-        </div>
-        <div className='relative block lg:hidden'>
-          <Image
-            src='/assets/images/vnst-icon-mobile.png'
-            width={537}
-            height={539}
-            quality={80}
-            alt='VNST'
-            className='relative bottom-0 right-0 w-full object-cover lg:absolute'
-          />
+        <div className=' grid w-full grid-cols-1 gap-x-8 rounded-xl lg:grid-cols-2 '>
+          <form
+            className={clsx(
+              ' flex w-full flex-col items-start justify-center lg:gap-x-10',
+              !isValid ? 'gap-y-4' : 'gap-y-4 md:gap-y-5'
+            )}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <div className='flex w-full flex-col'>
+              <Controller
+                control={control}
+                name='name'
+                render={({ field: { value, onChange } }) => (
+                  <Input
+                    placeholder={t('homepage:placeholder:name')}
+                    value={value}
+                    onChange={onChange}
+                    classNameInput={clsx(
+                      'lg:px-4 px-3 lg:py-3 py-2 rounded-md focus:border-primary focus:border text-base lg:leading-5 leading-[18px] w-full bg-gray-300 placeholder:text-gray font-semibold outline-none h-10 placeholder:text-sm md:placeholder:text-base',
+                      !!errors?.name
+                        ? 'text-error-100 border border-error-100'
+                        : 'text-black border-0 '
+                    )}
+                  />
+                )}
+              />
+              {errors.name ? (
+                <p className='mt-1 pl-2 text-xs text-error-100'>
+                  {errors.name.message}
+                </p>
+              ) : null}
+            </div>
+            <div className='flex w-full flex-col'>
+              <Controller
+                control={control}
+                name='email'
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    classNameInput={clsx(
+                      'lg:px-4 px-3 lg:py-3 py-2 rounded-md text-base lg:leading-5 leading-[18px] w-full bg-gray-300 placeholder:text-gray font-semibold outline-none h-10 placeholder:text-sm md:placeholder:text-base',
+                      !!errors?.email
+                        ? 'text-error-100 border border-error-100'
+                        : 'text-black border-0 '
+                    )}
+                    placeholder={t('homepage:placeholder:mail')}
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
+              />
+              {errors.email ? (
+                <p className='mt-1 pl-2 text-xs text-error-100'>
+                  {errors.email.message}
+                </p>
+              ) : null}
+            </div>
+            <div className='mt-2 flex w-full items-start justify-start xl:w-auto'>
+              <Button
+                type='submit'
+                size={'md'}
+                className='w-max !rounded-[8px] px-5 py-2.5 font-semibold capitalize !leading-5 lg:font-semibold xl:w-auto'
+              >
+                {t('homepage:send_mail')}
+              </Button>
+            </div>
+          </form>
         </div>
       </div>
       {openModal ? (
         <ModalStatus
           title={
-            <span className='!text-xl'>
+            <span className='text-lg leading-[22px] text-primary lg:text-xl lg:leading-6'>
               {nl2br(t('homepage:submit:success_title'))}
             </span>
           }
           variant={'primary'}
           isOpen={openModal}
-          className='bg-dark-1'
+          className=''
           onRequestClose={() => setOpenModal(false)}
         >
           <div className='flex flex-col items-center justify-center'>
@@ -229,14 +220,14 @@ const FormSendMail = ({ className }: TProps) => {
               width={120}
               height={120}
               alt='Image error'
-              className='aspect-[1/1] w-2/3 object-cover'
+              className='aspect-[1/1] h-[120] w-[120] object-cover'
             />
             <div className='w-full text-center'>
-              <span className='font-semibold text-white'>
+              <span className='text-sm font-semibold leading-[18px] text-gray lg:text-base lg:leading-5'>
                 {t('homepage:submit:success_content')}
               </span>
             </div>
-            <div className='text-gradient mt-2 w-full text-center text-base font-semibold'>
+            <div className='mt-2 w-full text-center text-sm font-semibold leading-[18px] text-primary lg:text-base lg:leading-5'>
               <span>{t('homepage:submit:success_content_1')}</span>
             </div>
           </div>

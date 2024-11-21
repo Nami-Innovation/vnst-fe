@@ -1,9 +1,9 @@
 {
   "connect_error": {
-    "default": "Kết nối Ví thất bại, vui lòng thử lại!",
+    "default": "Kết nối Ví không thành công, vui lòng thử lại.",
     "user_rejected": "Kết nối Ví thất bại, người dùng từ chối yêu cầu."
   },
-  "connect_success": "Kết nối Ví thành công!",
+  "connect_success": "Kết nối Ví thành công",
   "connect_wallet": "Kết nối Ví",
   "disconnect_wallet": "Ngắt kết nối Ví",
   "balance": "Số dư",
@@ -36,11 +36,17 @@
   "update_notification_success": "Cập nhật thông báo thành công!",
   "update_notification_error": "Cập nhật thông báo thất bại. Vui lòng thử lại!",
   "success_verify": "Thành công",
-  "success_verify_content": "Chúc mừng, bạn đã kích hoạt nhận thông qua báo Email thành công",
+  "success_verify_content": "Chúc mừng, bạn đã kích hoạt nhận thông báo qua Email thành công",
   "error_otp": "Mã xác minh không chính xác, vui lòng nhập lại",
   "dont_receive": "Không nhận được? ",
   "mint_success": "Mint thành công",
   "success_mint": "Chúc mừng, bạn đã nhận",
   "success_redeem": "Chúc mừng, bạn đã nhận",
-  "redeem_success": "Redeem thành công"
+  "redeem_success": "Redeem thành công",
+  "empty_search": "Không tìm thấy kết quả cho từ khoá: '{{keywords}}'",
+  "select_lang": "Chọn ngôn ngữ",
+  "select_network": "Chọn mạng",
+  "copy_link": "Sao chép",
+  "to_bsc": "Đi đến BSC Scan",
+  "add_to_wallet": "Thêm vào {{label}}"
 }

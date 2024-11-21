@@ -2,5 +2,9 @@
   "meta_description": "Chia sẻ kiến thức và thông tin hữu ích về Stablecoin. Xem ngay!",
   "share_post": "Chia sẻ",
   "related_post": "Các bài viết liên quan",
-  "back_to_page": "Quay trở lại trang trước"
+  "back_to_page": "Quay trở lại trang trước",
+  "not_found_page": "Không tìm thấy trang",
+  "content_not_found": "Xin lỗi! Chúng tôi không thể tìm thấy trang mà bạn đang truy cập.",
+  "result_search": "Từ khoá '{{search}}' có {{num}} kết quả",
+  "view_all": "Xem tất cả"
 }

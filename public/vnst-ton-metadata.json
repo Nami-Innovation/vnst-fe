@@ -1,0 +1,7 @@
+{
+    "name": "VNST Token",
+    "symbol": "VNST",
+    "decimals": "6",
+    "image": "https://vnst.io/assets/images/cryptos/vnst.png",
+    "description": "VNST is a stablecoin backed by the Basket of Stablecoins, ensuring its reserve, not tethered to any fiat currency for users in Vietnam and globally."
+  }

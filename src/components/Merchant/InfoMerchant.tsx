@@ -16,7 +16,7 @@ const InfoMerchant = ({ isConnect, filterDate, handleClick }: TProps) => {
   return (
     <div className='flex w-full flex-col gap-y-4'>
       <div className='flex w-full flex-row items-center justify-between'>
-        <p className='text-mb-large font-bold dark:text-white'>{t('title')}</p>
+        <p className='text-mb-large font-semibold dark:text-white'>{t('title')}</p>
         <div className='flex flex-row items-center gap-x-2  '>
           {/* {BTN_FILTER_LIST.map((item) => (
             <div key={item.id}>
